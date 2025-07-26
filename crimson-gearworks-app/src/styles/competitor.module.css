@@ -1,0 +1,56 @@
+.competitor{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 100px 50px 100px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background-color: var(--bg-color-primary);
+    border-radius: 10px;
+    margin-top: 25px;
+}
+
+.competitor:last-child {
+    margin-bottom: 0;
+}
+
+.competitor:nth-child(even) {
+  background-color: var(--bg-color-secondary);
+}
+
+.competitor:hover{
+    opacity: 0.5;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.rank {
+  font-size: 70px;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.competitor:hover .info h2{
+    transform: translateX(-10px);
+}
+
+.competitor:hover .rank{
+    transform: translateX(10px);
+}
+
+.competitor h2{
+    font-size: 40px;
+    margin: 0px;
+    font-weight: 800;
+    transition: all 0.4s;
+}
+
+.competitor p{
+    transition: all 0.4s;
+    font-weight: 300;
+}

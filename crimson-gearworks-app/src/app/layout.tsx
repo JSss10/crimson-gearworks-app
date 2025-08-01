@@ -17,6 +17,15 @@ const exo2 = Exo_2({
 export const metadata: Metadata = {
   title: "Crimson Gearworks",
   description: "",
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicons/icon.png', type: 'image/png', sizes: '256x256' },
+    ],
+    apple: [
+      { url: '/favicons/apple-icon.png', sizes: '256x256' },
+    ],
+  }
 };
 
 export default function RootLayout({

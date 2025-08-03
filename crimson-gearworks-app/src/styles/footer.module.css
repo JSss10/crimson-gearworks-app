@@ -1,0 +1,12 @@
+.container {
+  position: relative;
+  height: 800px;
+  clip-path: polygon(0% 0, 100% 0%, 100% 100%, 0 100%);
+}
+
+.fixedContent {
+  position: fixed;
+  bottom: 0;
+  height: 800px;
+  width: 100%;
+}

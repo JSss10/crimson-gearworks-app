@@ -1,0 +1,13 @@
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2vw;
+}
+
+.heading {
+  max-width: 45%;
+  text-align: center;
+  line-height: 1;
+}

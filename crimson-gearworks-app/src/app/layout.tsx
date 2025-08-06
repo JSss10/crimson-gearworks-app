@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Orbitron, Exo_2 } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/navbar/navbar";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -36,6 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${orbitron.variable} ${exo2.variable}`}>
+        <Navbar />
         {children}
       </body>
     </html>

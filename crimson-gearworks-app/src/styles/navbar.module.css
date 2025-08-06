@@ -1,0 +1,174 @@
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.header * {
+  pointer-events: auto;
+}
+
+.logo {
+  position: fixed;
+  top: -95px;
+  left: -70px;
+  overflow: hidden;
+}
+
+.logo img {
+  aspect-ratio: 1.11;
+  height: 260px;
+  width: 342px;
+  object-fit: cover;
+  transform: rotate(-19.43deg);
+}
+
+.ctaButton {
+  position: fixed;
+  top: 2rem;
+  right: 1.5rem;
+  height: 3rem;
+  width: 12.5rem;
+  text-transform: uppercase;
+}
+
+.ctaButton a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  height: 3rem;
+  width: 12.5rem;
+  background-color: var(--bg-color-primary);
+  border: 1px solid var(--color-secondary);
+  border-radius: 50px;
+  box-shadow: 0px 4px 4px var(--color-primary);
+  font-family: var(--font-exo-2), sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-color-primary);
+  text-decoration: none;
+  padding-left: 24px;
+}
+
+.ctaButtonArrowContainer {
+  background-color: var(--color-primary);
+  border: 1px solid var(--color-secondary);
+  border-radius: 50px;
+  height: 2rem;
+  width: 2rem;
+  position: absolute;
+  right: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  backdrop-filter: blur(8px);
+  background-color: var(--bg-white-10);
+  border-radius: 0.25rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 2rem;
+}
+
+.navLinks {
+  display: flex;
+  list-style: none;
+  gap: 35px;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-exo-2), sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.listItem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.listButton {
+  background: none;
+  border: none;
+  font-family: var(--font-exo-2), sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-color-primary);
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 0.5rem 0;
+  cursor: pointer;
+  letter-spacing: .24px;
+}
+
+.listButton::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0%;
+  height: 2px;
+  background-color: var(--color-primary);
+  transition: width 0.3s ease;
+}
+
+.listButton:hover::after {
+  width: 100%;
+}
+
+.subMenuWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.subNavbar {
+  position: fixed;
+  top: 3.1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  padding: 0.5rem 2rem;
+  background-color: var(--bg-color-primary);
+  border-radius: 0.25rem;
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.subNavLinks {
+  display: flex;
+  gap: 3rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.subNavLink {
+  font-family: var(--font-exo-2), sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-color-primary);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.subNavLink:hover {
+  color: var(--color-primary);
+}

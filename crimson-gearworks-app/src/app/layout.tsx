@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Orbitron, Exo_2 } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/navbar";
+import StairsTransitionWrapper from "../components/layout/stairs/stairs-transition-wrapper";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -18,15 +19,6 @@ const exo2 = Exo_2({
 export const metadata: Metadata = {
   title: "Crimson Gearworks",
   description: "",
-  icons: {
-    icon: [
-      { url: '/favicon.ico' },
-      { url: '/favicons/icon.png', type: 'image/png', sizes: '256x256' },
-    ],
-    apple: [
-      { url: '/favicons/apple-icon.png', sizes: '256x256' },
-    ],
-  }
 };
 
 export default function RootLayout({
@@ -39,6 +31,7 @@ export default function RootLayout({
       <body className={`${orbitron.variable} ${exo2.variable}`}>
         <Navbar />
         {children}
+        <StairsTransitionWrapper>{children}</StairsTransitionWrapper>
       </body>
     </html>
   );

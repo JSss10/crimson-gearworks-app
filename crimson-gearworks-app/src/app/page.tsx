@@ -1,9 +1,24 @@
-import styles from "./page.module.css";
+'use client';
+
+import Footer from "@/components/footer/footer";
+import Intro from "@/components/intro";
+import { useEffect } from "react";
+import Lenis from 'lenis';
 
 export default function Home() {
+  useEffect(() => {
+    const lenis = new Lenis();
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+  }, []);
+
   return (
-    <div className={styles.page}>
-      <h1>Crimson Gearworks</h1>
-    </div>
+    <main>
+      <Intro />
+      <Footer />
+    </main>
   );
 }

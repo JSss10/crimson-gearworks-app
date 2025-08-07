@@ -1,0 +1,81 @@
+.container {
+  background-color: var(--color-primary);
+  padding: 6rem 6rem 3rem 6rem;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--text-color-secondary);
+}
+
+.section2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.heading {
+  font-size: 10vw;
+  line-height: 1;
+  margin-top: 2rem;
+}
+
+.nav {
+  display: flex;
+  flex-shrink: 0;
+  gap: 6rem;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.headingSmall {
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.section1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 4rem;
+  margin-bottom: 6rem;
+  flex-wrap: wrap;
+}
+
+.contact {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.contactHeading {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.contactRow {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.button {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--text-color-secondary);
+  background: transparent;
+  border-radius: 50px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.smallText {
+  font-size: 0.75rem;
+}

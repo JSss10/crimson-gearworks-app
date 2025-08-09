@@ -3,6 +3,7 @@ import { Orbitron, Exo_2 } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/navbar";
 import StairsTransitionWrapper from "../components/layout/stairs/stairs-transition-wrapper";
+import Footer from "@/components/footer/footer";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -32,6 +33,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <StairsTransitionWrapper>{children}</StairsTransitionWrapper>
+        <Footer />
       </body>
     </html>
   );

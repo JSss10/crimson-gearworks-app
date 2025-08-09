@@ -1,6 +1,5 @@
 'use client';
 
-import Footer from "@/components/footer/footer";
 import Intro from "@/components/intro";
 import { useEffect } from "react";
 import Lenis from 'lenis';
@@ -18,7 +17,6 @@ export default function Home() {
   return (
     <main>
       <Intro />
-      <Footer />
     </main>
   );
 }

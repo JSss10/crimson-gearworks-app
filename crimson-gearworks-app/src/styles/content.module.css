@@ -1,6 +1,6 @@
 .container {
   background-color: var(--color-primary);
-  padding: 12rem 6rem 3rem 6rem;
+  padding: 6rem 6rem 3rem 6rem;
   height: 100%;
   width: 100%;
   display: flex;

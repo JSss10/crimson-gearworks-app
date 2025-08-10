@@ -5,17 +5,27 @@ import Lenis from 'lenis'
 import * as THREE from 'three'
 import styles from '@/styles/events.module.css'
 
-export default function Home() {
+export default function Events() {
   const containerRef = useRef<HTMLDivElement | null>(null)
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null)
 
   useEffect(() => {
     const scene = new THREE.Scene()
     const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000)
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+    rendererRef.current = renderer
 
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.setClearColor(0x000000, 0)
+
+    renderer.domElement.style.position = 'fixed'
+    renderer.domElement.style.top = '0'
+    renderer.domElement.style.left = '0'
+    renderer.domElement.style.width = '100%'
+    renderer.domElement.style.height = '100%'
+    renderer.domElement.style.zIndex = '-1'
+    renderer.domElement.style.pointerEvents = 'none'
 
     if (containerRef.current) {
       containerRef.current.appendChild(renderer.domElement)
@@ -52,7 +62,7 @@ export default function Home() {
 
     function loadImageTexture(imageNumber: number): Promise<THREE.Texture> {
       return new Promise((resolve) => {
-        const texture = textureLoader.load(`/images/events/img${imageNumber}.jpg`, (loadedTexture) => {
+        textureLoader.load(`/images/events/img${imageNumber}.jpg`, (loadedTexture) => {
           loadedTexture.generateMipmaps = true
           loadedTexture.minFilter = THREE.LinearMipmapLinearFilter
           loadedTexture.magFilter = THREE.LinearFilter
@@ -110,7 +120,7 @@ export default function Home() {
     const sectionAngle = (Math.PI * 2) / blocksPerSection
     const maxRandomAngle = sectionAngle * 0.2
 
-    async function createBlock(baseY: number, yOffset: number, sectionIndex: number, blockIndex: number) {
+    async function createBlock(baseY: number, yOffset: number, _sectionIndex: number, blockIndex: number) {
       const blockGeometry = createCurvedPlane(4.75, 2.75, radius, 20)
       const imageNumber = getRandomImage()
       const texture = await loadImageTexture(imageNumber)
@@ -153,19 +163,21 @@ export default function Home() {
     let rotationSpeed = 0
     const baseRotationSpeed = 0.0015
     const maxRotationSpeed = 0.05
-    const totalScroll = document.documentElement.scrollHeight - window.innerHeight
 
-    lenis.on('scroll', (e) => {
+    let totalScroll = document.documentElement.scrollHeight - window.innerHeight
+
+    lenis.on('scroll', (e: any) => {
       currentScroll = window.pageYOffset
-      rotationSpeed = e.velocity * 0.005
+      rotationSpeed = Math.max(Math.min(e.velocity * 0.005, maxRotationSpeed), -maxRotationSpeed)
     })
 
-    function animate() {
-      requestAnimationFrame(animate)
-      const scrollFraction = currentScroll / totalScroll
+    let rafId = 0
+    const animate = () => {
+      rafId = requestAnimationFrame(animate)
+      const scrollFraction = totalScroll > 0 ? currentScroll / totalScroll : 0
       camera.position.y = -(scrollFraction * height - height / 2)
       galleryGroup.rotation.y += baseRotationSpeed + rotationSpeed
-      rotationSpeed *= 2
+      rotationSpeed *= 0.9
       renderer.render(scene, camera)
     }
 
@@ -174,16 +186,51 @@ export default function Home() {
 
     function handleResize() {
       const width = window.innerWidth
-      const height = window.innerHeight
-      camera.aspect = width / height
+      const heightV = window.innerHeight
+      camera.aspect = width / heightV
       camera.updateProjectionMatrix()
-      renderer.setSize(width, height)
+      renderer.setSize(width, heightV)
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+      totalScroll = document.documentElement.scrollHeight - window.innerHeight
     }
 
     window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      cancelAnimationFrame(rafId)
+      renderer.dispose()
+      scene.traverse((obj) => {
+        if ((obj as THREE.Mesh).geometry) {
+          ; (obj as THREE.Mesh).geometry.dispose()
+        }
+        if ((obj as THREE.Mesh).material) {
+          const m = (obj as THREE.Mesh).material as THREE.Material | THREE.Material[]
+          if (Array.isArray(m)) m.forEach((mm) => mm.dispose())
+          else m.dispose()
+        }
+      })
+      if (renderer.domElement && renderer.domElement.parentNode) {
+        renderer.domElement.parentNode.removeChild(renderer.domElement)
+      }
+    }
   }, [])
 
-  return <div ref={containerRef} className={styles.canvasContainer}></div>
+  return (
+    <>
+      <div className={styles.hero}>
+        <div className={styles.heroInner}>
+          <h1 className={styles.titleLine}>
+            <span className={styles.orange}>MEET.</span>
+            <span className={styles.white}>GREET.</span>
+          </h1>
+          <h1 className={styles.titleLineTwo}>
+            <span>& REPEAT</span>
+          </h1>
+        </div>
+      </div>
+
+      <div ref={containerRef} className={styles.canvasContainer} />
+    </>
+  )
 }

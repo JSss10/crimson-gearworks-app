@@ -5,7 +5,14 @@
  */
 export const publicRoutes = [
   "/",
+  "/game-info",
+  "/3d-viewer",
   "/community/events",
+  "/community/leaderboard",
+  "/community/game-updates",
+  "/community/parts-shop",
+  "/about-us",
+  "/contact",
 ]
 
 /**

@@ -21,6 +21,12 @@ const competitors: CompetitorType[] = [
   { title: "Kaijura", location: "Los Angeles | USA", src: "test.png", color: "#000000" },
   { title: "Unit_04X", location: "Seoul | South Korea", src: "test.png", color: "#000000" },
   { title: "TheSeer", location: "Beijing | China", src: "test.png", color: "#000000" },
+  { title: "TheSeer", location: "Beijing | China", src: "test.png", color: "#000000" },
+  { title: "TheSeer", location: "Beijing | China", src: "test.png", color: "#000000" },
+  { title: "TheSeer", location: "Beijing | China", src: "test.png", color: "#000000" },
+  { title: "TheSeer", location: "Beijing | China", src: "test.png", color: "#000000" },
+  { title: "TheSeer", location: "Beijing | China", src: "test.png", color: "#000000" },
+  { title: "TheSeer", location: "Beijing | China", src: "test.png", color: "#000000" },
   { title: "Echo-9", location: "New Delhi | India", src: "test.png", color: "#000000" }
 ];
 
@@ -28,7 +34,10 @@ export default function Leaderboard() {
   const [modal, setModal] = useState<ModalType>({ active: false, index: 0 });
 
   return (
-    <main className={styles.main}>
+    <div className={styles.main}>
+      <h1 className={styles.title}>
+        <span>LEADER</span>BOARD
+      </h1>
       <div className={styles.body}>
         {competitors.map((competitor, index) => (
           <Competitor
@@ -41,6 +50,6 @@ export default function Leaderboard() {
         ))}
       </div>
       <Modal modal={modal} competitors={competitors} />
-    </main>
+    </div>
   );
 }

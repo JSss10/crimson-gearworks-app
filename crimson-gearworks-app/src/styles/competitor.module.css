@@ -30,9 +30,11 @@
 }
 
 .rank {
+  font-family: var(--font-orbitron), sans-serif;
   font-size: 70px;
   font-weight: 800;
-  color: var(--color-primary);
+  color: transparent;
+  -webkit-text-stroke: 1px var(--color-primary); 
 }
 
 .competitor:hover .info h2{

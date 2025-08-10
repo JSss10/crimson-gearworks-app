@@ -34,7 +34,6 @@
     height: 80px;
     border-radius: 50%;
     background-color: var(--color-primary);
-    color: white;
     position: absolute;
     z-index: 2;
     display: flex;

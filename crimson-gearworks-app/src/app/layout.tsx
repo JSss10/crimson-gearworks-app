@@ -31,8 +31,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${orbitron.variable} ${exo2.variable}`}>
         <Navbar />
-        {children}
-        <StairsTransitionWrapper>{children}</StairsTransitionWrapper>
+        <StairsTransitionWrapper>
+          {children}
+        </StairsTransitionWrapper>
         <Footer />
       </body>
     </html>

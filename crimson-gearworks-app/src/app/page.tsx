@@ -3,6 +3,7 @@
 import Intro from "@/components/intro";
 import { useEffect } from "react";
 import Lenis from 'lenis';
+import Test from "@/components/text";
 
 export default function Home() {
   useEffect(() => {
@@ -17,6 +18,7 @@ export default function Home() {
   return (
     <main>
       <Intro />
+      <Test />
     </main>
   );
 }

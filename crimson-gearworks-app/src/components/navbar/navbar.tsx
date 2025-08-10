@@ -35,13 +35,13 @@ export default function Navbar() {
       <nav className={styles.navbar}>
         <ul className={styles.navLinks}>
           <li className={styles.listItem}>
-            <Link href="#">
-              <button className={styles.listButton}>GAME INFO</button>
+            <Link href="/game-info" className={styles.listButton}>
+              GAME INFO
             </Link>
           </li>
           <li className={styles.listItem}>
-            <Link href="#">
-              <button className={styles.listButton}>3D VIEWER</button>
+            <Link href="/3d-viewer" className={styles.listButton}>
+              3D VIEWER
             </Link>
           </li>
           <li
@@ -54,29 +54,29 @@ export default function Navbar() {
               <div className={styles.subNavbar}>
                 <ul className={styles.subNavLinks}>
                   <li>
-                    <Link href="#" className={styles.subNavLink}>Events</Link>
+                    <Link href="/community/events" className={styles.subNavLink}>Events</Link>
                   </li>
                   <li>
-                    <Link href="#" className={styles.subNavLink}>Leaderboard</Link>
+                    <Link href="/community/leaderboard" className={styles.subNavLink}>Leaderboard</Link>
                   </li>
                   <li>
-                    <Link href="#" className={styles.subNavLink}>Game Updates</Link>
+                    <Link href="/community/game-updates" className={styles.subNavLink}>Game Updates</Link>
                   </li>
                   <li>
-                    <Link href="#" className={`${styles.subNavLink} ${styles.active}`}>Parts Shop</Link>
+                    <Link href="/community/parts-shop" className={`${styles.subNavLink} ${styles.active}`}>Parts Shop</Link>
                   </li>
                 </ul>
               </div>
             )}
           </li>
           <li className={styles.listItem}>
-            <Link href="#">
-              <button className={styles.listButton}>ABOUT US</button>
+            <Link href="/about-us" className={styles.listButton}>
+              ABOUT US
             </Link>
           </li>
           <li className={styles.listItem}>
-            <Link href="#">
-              <button className={styles.listButton}>CONTACT</button>
+            <Link href="/contact" className={styles.listButton}>
+              CONTACT
             </Link>
           </li>
         </ul>

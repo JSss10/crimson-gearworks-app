@@ -1,0 +1,20 @@
+.page {
+  max-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  margin-top: 15vh;
+}
+
+.title {
+  width: 100vw;
+  margin-left: calc(-60px);
+  font-size: 12rem;
+  text-align: center;
+  margin: 0;
+  line-height: 0.85;
+  text-transform: uppercase;
+}
+
+.title span {
+  color: var(--color-primary);
+}

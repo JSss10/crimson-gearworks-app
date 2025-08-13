@@ -1,13 +1,12 @@
 .paragraph {
   display: flex;
   justify-content: center;
-  font-size: 30px;
+  font-size: 25px;
+  font-weight: 100;
   line-height: 1;
   padding: 50px;
   max-width: 1200px;
   flex-wrap: wrap;
-  margin: 15vh auto;
-  justify-content: center;
 }
 
 .word {

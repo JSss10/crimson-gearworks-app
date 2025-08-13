@@ -1,6 +1,6 @@
 .container{
   position: relative;
-  height: 300vh;
+  min-height: 200vh;
 }
 
 .stickyMask{

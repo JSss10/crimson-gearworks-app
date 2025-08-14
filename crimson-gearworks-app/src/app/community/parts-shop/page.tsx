@@ -1,9 +1,10 @@
-const PartsShopPage = () => {
-  return (
-    <div>
-      <h1>Parts Shop Page</h1>
-    </div>
-  );
+import PartsShop from "@/components/parts-shop/partsShop";
+
+export const metadata = {
+  title: "Parts-Shop",
+  description: "Game XY – Parts-Shop Grid with filters & search",
 };
 
-export default PartsShopPage;
+export default function PartsShopPage() {
+  return <PartsShop />;
+}

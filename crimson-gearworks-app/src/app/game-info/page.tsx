@@ -3,8 +3,18 @@ import Image from 'next/image';
 import styles from '@/styles/gameInfo.module.css';
 import Character from '@/components/text-scroll/character';
 import TextClipMask from '@/components/text-clip-mask/text-clip-mask';
+import HoverGallery from '@/components/hover-gallery/hoverGallery';
+import type { ProjectItem } from '@/components/project/project';
 
 const paragraph = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+
+const projects: ProjectItem[] = [
+  { title1: 'Lorem ipsum', title2: 'Lorem', src: 'img1.jpg' },
+  { title1: 'Lorem ipsum', title2: 'Lorem', src: 'img1.jpg' },
+  { title1: 'Lorem ipsum', title2: 'Lorem', src: 'img1.jpg' },
+  { title1: 'Lorem ipsum', title2: 'Lorem', src: 'img1.jpg' },
+  { title1: 'Lorem ipsum', title2: 'Lorem', src: 'img1.jpg' },
+];
 
 export default function GameInfoPage() {
   return (
@@ -37,6 +47,7 @@ export default function GameInfoPage() {
       </section>
       <Character paragraph={paragraph} />
       <TextClipMask />
+      <HoverGallery projects={projects} />
     </>
   );
 }

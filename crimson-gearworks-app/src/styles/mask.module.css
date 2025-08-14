@@ -1,14 +1,14 @@
 .container{
   position: relative;
-  min-height: 200vh;
+  margin: 15vh 0;
 }
 
 .stickyMask{
   display: flex;
   overflow: hidden;
   position: sticky;
-  top: 0;
-  height: 100vh;
+  top: 0; /* einfach: am oberen Rand pinnen */
+  height: var(--sticky-h, 60vh);
   align-items: center;
   justify-content: center;
   mask-image: url('/medias/mask.svg');

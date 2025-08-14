@@ -1,9 +1,115 @@
-const ContactPage = () => {
-  return (
-    <div>
-      <h1>Contact Page</h1>
-    </div>
-  );
-};
+'use client';
 
-export default ContactPage;
+import styles from "@/styles/contact.module.css";
+
+export default function ContactPage() {
+  return (
+    <section className={styles.container}>
+      <div className={styles.hero}>
+        <div className={styles.heroInner}>
+          <h1 className={styles.titleLine}>
+            <span className={styles.orange}>Let's</span>
+            <span className={styles.white}>get</span>
+          </h1>
+          <h1 className={styles.titleLineTwo}>
+            <span>In touch</span>
+          </h1>
+        </div>
+      </div>
+
+      <div className={styles.wrapper}>
+        <div className={styles.grid}>
+          <div className={styles.formCol}>
+            <div className={styles.tabs} role="tablist" aria-label="Kontakt-Anliegen">
+              <button className={`${styles.tab} ${styles.tabActive}`} role="tab" aria-selected>
+                Say Hello
+              </button>
+              <button className={styles.tab} role="tab" aria-selected={false}>
+                Need Help?
+              </button>
+              <button className={styles.tab} role="tab" aria-selected={false}>
+                Something Else
+              </button>
+            </div>
+
+            <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
+              <label className={styles.field}>
+                <input className={styles.input} placeholder="Name" />
+              </label>
+
+              <label className={styles.field}>
+                <input className={styles.input} type="email" placeholder="E-Mail" />
+              </label>
+
+              <label className={`${styles.field} ${styles.fieldFull}`}>
+                <div className={styles.selectWrap}>
+                  <select className={`${styles.input} ${styles.select}`} defaultValue="" aria-label="Subject">
+                    <option value="" disabled>
+                      Subject
+                    </option>
+                    <option>Say Hello</option>
+                    <option>Need Help</option>
+                    <option>Something Else</option>
+                  </select>
+                  <span aria-hidden className={styles.chevron}>▾</span>
+                </div>
+              </label>
+
+              <label className={`${styles.field} ${styles.fieldFull}`}>
+                <textarea className={`${styles.input} ${styles.textarea}`} placeholder="Message" rows={6} />
+              </label>
+
+              <div className={styles.ctaRow}>
+                <button type="button" className={styles.ctaButton}>
+                  <span className={styles.ctaIcon} aria-hidden>
+                    <svg viewBox="0 0 24 24" width="18" height="18">
+                      <circle cx="12" cy="12" r="9" fill="currentColor" opacity="0.15" />
+                      <path d="M8 12h8M13 8l3.9 4L13 16" stroke="currentColor" strokeWidth="1.7" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                  <span>LET’S CHAT</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <aside className={styles.infoCol}>
+            <div className={styles.infoBlock}>
+              <div>
+                <div className={styles.infoLabel}>Phone</div>
+                <div className={styles.infoValue}>+ (41) 079 732 18 49</div>
+              </div>
+              <div className={styles.iconBtn} aria-hidden>
+                <img src="" alt="" />
+              </div>
+            </div>
+
+            <div className={styles.infoBlock}>
+              <div>
+                <div className={styles.infoLabel}>E‑Mail</div>
+                <div className={styles.infoValue}>hello@crimsongearworks.com</div>
+              </div>
+              <div className={styles.iconBtn} aria-hidden>
+                <img src="" alt="" />
+              </div>
+            </div>
+
+            <div className={styles.infoBlock}>
+              <div>
+                <div className={styles.infoLabel}>Studio</div>
+                <div className={styles.infoValue}>
+                  Buckhauserstrasse 24
+                  <br />
+                  8048 Zurich
+                </div>
+              </div>
+              <div className={styles.iconBtn} aria-hidden>
+                <img src="" alt="" />
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  );
+}

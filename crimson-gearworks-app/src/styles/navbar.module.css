@@ -125,7 +125,9 @@
   transition: width 0.3s ease;
 }
 
-.listButton:hover::after {
+.listButton:hover::after,
+.listButton:focus-visible::after,
+.listButton[data-active="true"]::after {
   width: 100%;
 }
 
@@ -169,6 +171,8 @@
   transition: color 0.2s ease;
 }
 
-.subNavLink:hover {
+.subNavLink:hover,
+.subNavLink:focus-visible,
+.subNavLink[data-active="true"] {
   color: var(--color-primary);
 }

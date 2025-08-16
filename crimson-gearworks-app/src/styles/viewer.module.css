@@ -50,8 +50,8 @@
   font-size: 0.875rem; 
 }
 
-.spaceY3 > * + * { 
-  margin-top: 0.75rem; 
+.spaceY1 > * + * { 
+  margin-top: 1rem; 
 }
 
 .stage { 

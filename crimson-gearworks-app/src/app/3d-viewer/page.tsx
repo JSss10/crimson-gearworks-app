@@ -81,9 +81,9 @@ export default function Index() {
           </Searchbar>
         </div>
 
-        <div className={styles.spaceY3}>
+        <div className={styles.spaceY1}>
           {partTypeRegistry.map((partType) => {
-            const partsPerType = allParts.filter((part) => part.partType === partType.id);
+            const partsPerType = filteredParts.filter((part) => part.partType === partType.id);
 
             return (
               partsPerType.length > 0 && (

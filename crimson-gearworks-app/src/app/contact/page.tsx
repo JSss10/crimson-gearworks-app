@@ -1,6 +1,7 @@
 'use client';
 
-import styles from "@/styles/contact.module.css";
+import styles from "@/styles/contact/index.module.css";
+import { FaInstagram as Instagram, FaDiscord as Discord, FaSteam as Steam } from "react-icons/fa";
 
 export default function ContactPage() {
   return (
@@ -56,13 +57,18 @@ export default function ContactPage() {
               </label>
 
               <label className={`${styles.field} ${styles.fieldFull}`}>
-                <textarea className={`${styles.input} ${styles.textarea}`} placeholder="Message" rows={6} />
+                <textarea
+                  className={`${styles.input} ${styles.textarea}`}
+                  placeholder="Message"
+                  rows={6}
+                  style={{ resize: 'none' }}
+                />
               </label>
 
               <div className={styles.ctaRow}>
                 <button type="button" className={styles.ctaButton}>
                   <span className={styles.ctaIcon} aria-hidden>
-                    <svg viewBox="0 0 24 24" width="18" height="18">
+                    <svg viewBox="0 0 24 24" width="24" height="24">
                       <circle cx="12" cy="12" r="9" fill="currentColor" opacity="0.15" />
                       <path d="M8 12h8M13 8l3.9 4L13 16" stroke="currentColor" strokeWidth="1.7" fill="none" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
@@ -79,19 +85,31 @@ export default function ContactPage() {
                 <div className={styles.infoLabel}>Phone</div>
                 <div className={styles.infoValue}>+ (41) 079 732 18 49</div>
               </div>
-              <div className={styles.iconBtn} aria-hidden>
-                <img src="" alt="" />
-              </div>
+              <a
+                href="https://discord.gg/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.iconBtn}
+                aria-label="Discord"
+              >
+                <Discord size={34} />
+              </a>
             </div>
 
             <div className={styles.infoBlock}>
               <div>
-                <div className={styles.infoLabel}>E‑Mail</div>
+                <div className={styles.infoLabel}>E-Mail</div>
                 <div className={styles.infoValue}>hello@crimsongearworks.com</div>
               </div>
-              <div className={styles.iconBtn} aria-hidden>
-                <img src="" alt="" />
-              </div>
+              <a
+                href="https://www.instagram.com/crimonsgearworks/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.iconBtn}
+                aria-label="Instagram"
+              >
+                <Instagram size={34} />
+              </a>
             </div>
 
             <div className={styles.infoBlock}>
@@ -103,9 +121,15 @@ export default function ContactPage() {
                   8048 Zurich
                 </div>
               </div>
-              <div className={styles.iconBtn} aria-hidden>
-                <img src="" alt="" />
-              </div>
+              <a
+                href="https://store.steampowered.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.iconBtn}
+                aria-label="Steam"
+              >
+                <Steam size={34} />
+              </a>
             </div>
           </aside>
         </div>

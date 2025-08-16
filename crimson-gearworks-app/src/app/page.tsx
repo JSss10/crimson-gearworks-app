@@ -1,6 +1,6 @@
 'use client';
 
-import Intro from "@/components/intro";
+import Intro from "@/components/home/hero";
 import { useEffect } from "react";
 import Lenis from 'lenis';
 

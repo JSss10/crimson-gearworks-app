@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Orbitron, Exo_2 } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/navbar/navbar";
-import StairsTransitionWrapper from "../components/layout/stairs/stairs-transition-wrapper";
-import Footer from "@/components/footer/footer";
+import Navbar from "@/components/navbar";
+import StairsTransitionWrapper from "@/components/features/stairs-transition-wrapper";
+import Footer from "@/components/footer/index";
 
 const orbitron = Orbitron({
   subsets: ["latin"],

@@ -1,8 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
-import styles from '@/styles/about.module.css';
-import Team from '@/components/about-us/team';
-import PolaroidScene from '@/components/about-us/polaroidScene';
+import styles from '@/styles/about-us/index.module.css';
+import Team from '@/components/features/team-reveal';
+import PolaroidScene from '@/components/features/polaroid-scene';
 
 export default function AboutUsPage() {
   return (

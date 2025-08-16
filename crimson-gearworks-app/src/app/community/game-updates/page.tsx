@@ -1,5 +1,5 @@
-import TimelineScroller from '@/components/game-updates/timelineScroller';
-import styles from '@/styles/gameUpdates.module.css';
+import TimelineScroller from '@/components/features/timeline-scroller';
+import styles from '@/styles/game-updates/index.module.css';
 
 export default function GameUpdatesPage() {
   return (

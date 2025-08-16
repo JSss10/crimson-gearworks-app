@@ -3,9 +3,9 @@
 import { useEffect, useRef } from 'react'
 import Lenis from 'lenis'
 import * as THREE from 'three'
-import styles from '@/styles/events.module.css'
+import styles from '@/styles/events/index.module.css'
 
-export default function Events() {
+export default function EventsPage() {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null)
 

@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import styles from '@/styles/leaderboard.module.css';
-import Competitor from '@/components/leaderboard/competitor/page';
-import Modal from '@/components/leaderboard/modal/page';
+import styles from '@/styles/leaderboard/index.module.css';
+import Competitor from '@/components/leaderboard/competitor';
+import Modal from '@/components/features/modal';
 
 interface CompetitorType {
   title: string;
@@ -30,7 +30,7 @@ const competitors: CompetitorType[] = [
   { title: "Echo-9", location: "New Delhi | India", src: "test.png", color: "#000000" }
 ];
 
-export default function Leaderboard() {
+export default function LeaderboardPage() {
   const [modal, setModal] = useState<ModalType>({ active: false, index: 0 });
 
   return (

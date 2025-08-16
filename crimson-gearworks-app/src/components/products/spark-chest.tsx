@@ -420,7 +420,7 @@ export default function SparkChest() {
             </div>
             <div className={styles.description}>
               <p className={styles.p} data-el="tt1-desc">
-                The Bipedal Maya Gundam Frame is a first generation mech from CxD Corp. XS01 is the first Experimental Shooter type of this series. It's chest piece has two points of articulation and is equipped with a nuclear reactor to power the XS01.
+                The Bipedal Maya Gundam Frame is a first generation mech from CxD Corp. XS01 is the first Experimental Shooter type of this series. Its chest piece has two points of articulation and is equipped with a nuclear reactor to power the XS01.
               </p>
             </div>
           </div>
@@ -433,7 +433,7 @@ export default function SparkChest() {
             </div>
             <div className={styles.description}>
               <p className={styles.p} data-el="tt2-desc">
-                The XS01 Unit is a Shooter type with various long and medium ranged weaponry. It's main feature is the Wing Unit. To increase mobility, the XS01 is capable to activate the WoL system. That system allows the nuclear reactor to overload it's output, which causes it to burst all that energy at once, creating wings made out of many Sparks.
+                The XS01 Unit is a Shooter type with various long and medium ranged weaponry. Its main feature is the Wing Unit. To increase mobility, the XS01 is capable of activating the WoL system. Said system allows the nuclear reactor to overload its output, which causes it to burst all of the energy at once, creating wings made out of many Sparks.
               </p>
             </div>
           </div>

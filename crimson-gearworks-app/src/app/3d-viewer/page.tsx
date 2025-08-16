@@ -67,6 +67,8 @@ export default function Index() {
   return (
     <div className={styles.root} style={{ minWidth: '800px' }}>
       <div className={styles.sidebar}>
+        <div className={styles.logoOffset}></div>
+
         <div className={styles.brandBlock}>
           <h1 className={styles.brandTitle}>
             CRIMSON-CONFIGURATOR <span className={styles.brandVersion}>V1.04</span>

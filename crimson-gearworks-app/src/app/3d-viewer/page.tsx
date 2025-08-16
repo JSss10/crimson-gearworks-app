@@ -3,8 +3,8 @@
 import ThreeScene from '@/components/ThreeScene';
 import PartDetailsPanel from '@/components/customization/PartDetailsPanel';
 
-import { useState } from 'react';
-import { Dropdown, DropdownContent, ToggleButton } from '@/components/ui/UIComponents';
+import { ChangeEvent, useState } from 'react';
+import { Dropdown, DropdownContent, Searchbar, ToggleButton } from '@/components/ui/UIComponents';
 import { partTypeRegistry } from '@/components/Types';
 import { partRegistry } from '@/components/ModelPart';
 import type { ModelPart } from '@/components/Types';
@@ -16,6 +16,19 @@ export default function Index() {
   const [selectedPart, setSelectedPart] = useState<ModelPart | null>(null);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [activeParts, setActiveParts] = useState<ModelPart[]>(allParts);
+  const [searchText, setSearchText] = useState("");
+
+  const filteredParts = allParts.filter((part) => {
+    if (searchText.trim() === '') {
+      return true;
+    }
+    return part.name.toLowerCase().includes(searchText.toLowerCase());
+  });
+
+  let inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    let input = e.target.value.toLowerCase(); 
+    setSearchText(input);
+  }
 
   const selectPart = (part: ModelPart) => {
     const updatedPart = { ...part, isSelected: true, isVisible: true };
@@ -59,6 +72,11 @@ export default function Index() {
             CRIMSON-CONFIGURATOR <span className={styles.brandVersion}>V1.04</span>
           </h1>
           <p className={styles.brandSubtitle}>CUSTOMIZE YOUR MECHA</p>
+        </div>
+
+        <div className={styles.searchBar}>
+          <Searchbar inputHandler={inputHandler}>
+          </Searchbar>
         </div>
 
         <div className={styles.spaceY3}>

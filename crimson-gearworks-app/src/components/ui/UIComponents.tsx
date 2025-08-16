@@ -1,5 +1,5 @@
 import { FiChevronUp, FiChevronDown } from 'react-icons/fi';
-import { useState, useRef, useContext, createContext } from 'react';
+import { useState, useRef, useContext, createContext, ChangeEvent } from 'react';
 import type { ModelPart } from '../Types';
 import styles from './UIComponents.module.css';
 
@@ -12,6 +12,10 @@ interface DropdownContextType {
 }
 
 const DropdownContext = createContext<DropdownContextType | undefined>(undefined);
+
+interface SearchbarProps {
+  inputHandler: (e: ChangeEvent<HTMLInputElement>) => void;
+}
 
 export const Dropdown = ({ children, displayItems, onItemSelect }: { children: React.ReactNode; displayItems: ModelPart[]; onItemSelect?: (item: ModelPart) => void; }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,3 +64,16 @@ export const DropdownContent = () => {
     )
   );
 };
+
+export const Searchbar = ({ inputHandler }: SearchbarProps) => {
+  return (
+    <div className={styles.searchBarItem}>
+      <input 
+        className={styles.fullSize} 
+        placeholder='Search...' style={{ outline: 'none'}}
+        onChange={inputHandler}
+      >
+      </input>
+    </div>
+  );
+}

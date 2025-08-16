@@ -1,5 +1,5 @@
 import type { CustomizationOption } from '../Types';
-import styles from './CustomizationGroup.module.css';
+import styles from './customizationGroup.module.css';
 
 interface CustomizationGroupProps {
   title: string;

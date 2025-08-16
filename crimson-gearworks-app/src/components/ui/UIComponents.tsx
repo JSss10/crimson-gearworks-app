@@ -1,7 +1,7 @@
 import { FiChevronUp, FiChevronDown } from 'react-icons/fi';
 import { useState, useRef, useContext, createContext, ChangeEvent } from 'react';
 import type { ModelPart } from '../Types';
-import styles from './UIComponents.module.css';
+import styles from './uiComponents.module.css';
 
 interface DropdownContextType {
   isOpen: boolean;

@@ -1,8 +1,8 @@
-import CustomizationGroup from './CustomizationGroup';
+import CustomizationGroup from './customizationGroup';
 import { IoClose } from 'react-icons/io5';
 import { useState } from 'react';
 import type { CustomizationOption, ModelPart } from '../Types';
-import styles from './PartDetailsPanel.module.css';
+import styles from './partDetailsPanel.module.css';
 
 interface PartDetailsPanelProps {
   selectedPart: ModelPart | null;

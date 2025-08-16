@@ -1,10 +1,10 @@
 'use client';
 
 import ThreeScene from '@/components/ThreeScene';
-import PartDetailsPanel from '@/components/customization/PartDetailsPanel';
+import PartDetailsPanel from '@/components/customization/partDetailsPanel';
 
 import { ChangeEvent, useState } from 'react';
-import { Dropdown, DropdownContent, Searchbar, ToggleButton } from '@/components/ui/UIComponents';
+import { Dropdown, DropdownContent, Searchbar, ToggleButton } from '@/components/ui/uiComponents';
 import { partTypeRegistry } from '@/components/Types';
 import { partRegistry } from '@/components/ModelPart';
 import type { ModelPart } from '@/components/Types';

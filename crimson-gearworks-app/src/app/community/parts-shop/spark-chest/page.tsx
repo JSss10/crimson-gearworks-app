@@ -1,4 +1,4 @@
-import SparkChest from "@/components/products/sparkChest";
+import SparkChest from "@/components/products/spark-chest";
 
 export default function SparkChestProductPage() {
   return <SparkChest />;

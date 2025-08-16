@@ -189,15 +189,12 @@
   }
 }
 
-/* --- HERO ----------------------------------------------------------------- */
 .hero {
   background: #000;
   color: #e0dfdf;
-  display: grid;
-  grid-template-rows: auto 1fr;
   padding: 0 40px;
-  margin-top: 18vh;
-  height: 82vh;
+  margin-top: 12vh;
+  height: 88vh;
 }
 
 .productTitle {
@@ -207,13 +204,12 @@
   font-weight: 800;
   letter-spacing: 0.02em;
   line-height: 1;
-  text-transform: uppercase;       /* auch der Titel selbst streckt sich */
+  text-transform: uppercase;
 }
 
 .title {
-  width: 100vw;
-  margin-left: calc(-60px);
-  font-size: 7.3rem;
+  width: 100%;
+  font-size: 8rem;
   text-align: center;
   margin-bottom: 20px;
   text-transform: uppercase;
@@ -232,25 +228,26 @@
   font-size: clamp(1.5rem, 6vw, 4rem);
 }
 
-/* Drei Spalten */
 .heroGrid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 5rem;
   align-items: center;
   justify-content: center;
+  margin-top: 5vh;
 }
 
-/* Linkes Info-Panel */
 .infoPanel {
   background: #1a1a1a;
   border-radius: 14px;
   padding: 2rem;
   box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  width: 400px;
+  justify-self: end; 
 }
 
 .accordion {
-  background: #141414;
+  background: var(--bg-color-secondary);
   border-radius: 10px;
   margin: 1rem 0;
   padding: 1.25rem;
@@ -267,6 +264,7 @@
   content: "▾";
   float: right;
   opacity: 0.7;
+  color: var(--text-color-primary);
 }
 .accordion[open] summary::after { transform: rotate(180deg); }
 .accordionBody {
@@ -275,10 +273,9 @@
   margin-top: 0.5rem;
 }
 
-/* Mittig: Frame + Canvas */
 .modelFrame {
   position: relative;
-  aspect-ratio: 1 / 1;        /* quadratische Bühne wie im Shot */
+  aspect-ratio: 1 / 1;
   width: 100%;
   max-width: min(400px, 80vw);
   margin: 0 auto;
@@ -289,7 +286,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  z-index: 0; /* Canvas drüber setzen, falls gewünscht */
+  z-index: 0;
 }
 .modelContainer {
   position: absolute;
@@ -303,20 +300,17 @@
   height: 100%;
 }
 
-/* Vier Eck-Markierungen */
 .frameCorner {
   position: absolute;
   width: 28px;
   height: 28px;
-  border: 3px solid #ff6a00;
-  z-index: 2;
+  border: 3px solid var(--color-primary);
 }
 .frameCorner:nth-child(1) { top: 0%; left: -0%; border-right: 0; border-bottom: 0; }
 .frameCorner:nth-child(2) { top: 0%; right: -0%; border-left: 0; border-bottom: 0; }
 .frameCorner:nth-child(3) { bottom: 0%; left: -0%; border-right: 0; border-top: 0; }
 .frameCorner:nth-child(4) { bottom: 0%; right: -0%; border-left: 0; border-top: 0; }
 
-/* Rechtes Kauf-Panel */
 .purchaseCard {
   background: #1a1a1a;
   border-radius: 14px;
@@ -325,21 +319,19 @@
   display: grid;
   grid-template-rows: auto auto auto auto auto;
   gap: 0.9rem;
+  width: 400px;
+  justify-self: start; 
 }
 .priceRow {
   display: flex;
   align-items: baseline;
   gap: 0.4rem;
   color: #ffffff;
+  font-family: var(--font-orbitron), sans-serif;
+    font-weight: 800;
+  font-size: 2rem;
 }
-.currency {
-  font-weight: 700;
-  opacity: 0.9;
-}
-.price {
-  font-size: 1.8rem;
-  font-weight: 800;
-}
+
 .optionBlock {
   display: flex;
   gap: 0.5rem;
@@ -351,16 +343,15 @@
 .optionLabel { font-weight: 700; }
 .optionValue { opacity: 0.8; }
 
-/* Thumbnails */
 .thumbs {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 gleich große Spalten */
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 0.5rem;
   margin-bottom: 1rem;
 }
 
 .thumb {
-  aspect-ratio: 1 / 1; /* quadratisch, egal welche Breite */
+  aspect-ratio: 1 / 1;
   border-radius: 10px;
   background: #2a2a2a;
   border: 2px solid transparent;
@@ -375,23 +366,23 @@
 }
 
 .thumbActive {
-  border-color: #ff6a00;
-  box-shadow: 0 0 0 2px rgba(255,106,0,0.25);
+  border-color: #fff;
+  box-shadow: 0 0 0 1 rgba(255,106,0,0.25);
 }
 
 .ctaRow {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Abstand zwischen Buttons */
+  justify-content: space-between;
   gap: 0.5rem;
 }
 
 .cta:hover { filter: brightness(1.05); }
 
 .cta {
-  flex: 1; /* nimmt restliche Breite */
-    background: #ff6a00;
-  color: #000;
+  flex: 1;
+  background: var(--color-primary);
+  color: #fff;
   border: none;
   border-radius: 10px;
   padding: 0.9rem 1rem;
@@ -401,7 +392,7 @@
 }
 
 .settingsBtn {
-  background: #242424;
+  background: var(--bg-color-secondary);
   border: none;
   border-radius: 10px;
   width: 44px;
@@ -411,16 +402,9 @@
   justify-content: center;
   gap: 3px;
   cursor: pointer;
-}
-.settingsDot {
-  width: 4px;
-  height: 4px;
-  background: #a0a0a0;
-  border-radius: 999px;
+  color: var(--color-primary)
 }
 
-
-/* Responsiv */
 @media (max-width: 1000px) {
   .hero {
     padding: 1.25rem 1rem 2rem;

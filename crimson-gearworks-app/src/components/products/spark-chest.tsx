@@ -1,14 +1,25 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import styles from "@/styles/products/sparkChest.module.css";
+import { useEffect, useRef, useState, useMemo } from "react";
+import styles from "@/styles/products/spark-chest.module.css";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
+import { Settings } from "lucide-react";
 
 export default function SparkChest() {
+  const variants = useMemo(
+    () => [
+      { label: "Orange", src: "/images/parts-shop/BMGF-XS01_Spark_Chest.png" },
+      { label: "Gray", src: "/images/parts-shop/BMGF-XS01_Spark_Chest.png" },
+      { label: "Black", src: "/images/parts-shop/BMGF-XS01_Spark_Chest.png" },
+    ],
+    []
+  );
+  const [selected, setSelected] = useState(0);
+
   const containerRef = useRef<HTMLDivElement | null>(null);
   const modelContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -21,11 +32,10 @@ export default function SparkChest() {
   const currentRotationRef = useRef<number>(0);
   const rafRef = useRef<number | null>(null);
 
-  // Pivot-Group & Scale-Ziele
   const pivotRef = useRef<THREE.Group | null>(null);
-  const SCALE_START = 0.8; // Anfang
-  const SCALE_SMALL = 0.4; // während Tooltips
-  const SCALE_END = 0.6; // final nach Tooltips
+  const SCALE_START = 0.8;
+  const SCALE_SMALL = 0.4;
+  const SCALE_END = 0.6;
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -33,7 +43,6 @@ export default function SparkChest() {
     const scope = containerRef.current;
     if (!scope) return;
 
-    // --- Text Prep ---
     const wrapChars = (el: Element | null) => {
       if (!el) return;
       const chars = [...(el.textContent || "")];
@@ -65,7 +74,6 @@ export default function SparkChest() {
 
     const animOptions = { duration: 1, ease: "power3.out", stagger: 0.025 } as const;
 
-    // --- THREE Grundsetup ---
     const scene = new THREE.Scene();
     sceneRef.current = scene;
 
@@ -85,7 +93,7 @@ export default function SparkChest() {
       modelContainerRef.current.appendChild(renderer.domElement);
     }
 
-    scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+    scene.add(new THREE.AmbientLight(0xffffff, 1.0));
 
     const mainLight = new THREE.DirectionalLight(0xffffff, 1.0);
     mainLight.position.set(1, 2, 3);
@@ -98,13 +106,11 @@ export default function SparkChest() {
     fillLight.position.set(-2, 0, -2);
     scene.add(fillLight);
 
-    // Pivot-Gruppe am Ursprung
     const pivot = new THREE.Group();
     pivotRef.current = pivot;
     scene.add(pivot);
-    pivot.scale.setScalar(SCALE_START); // Start bei 0.8
+    pivot.scale.setScalar(SCALE_START);
 
-    // --- Kamera/Model Setup ---
     const setupModel = () => {
       const modelSize = modelSizeRef.current;
       if (!modelSize || !cameraRef.current) return;
@@ -119,7 +125,6 @@ export default function SparkChest() {
       camera.lookAt(0, 0, 0);
     };
 
-    // --- GLTF Laden ---
     const loader = new GLTFLoader();
     loader.load(
       "/models/spark-chest.glb",
@@ -137,7 +142,6 @@ export default function SparkChest() {
         const size = box.getSize(new THREE.Vector3());
         const center = box.getCenter(new THREE.Vector3());
 
-        // Modell lokal auf Ursprung zentrieren → Skalierung bleibt mittig
         model.position.sub(center);
         model.rotation.set(0, 0, 0);
 
@@ -153,14 +157,12 @@ export default function SparkChest() {
       }
     );
 
-    // --- Render Loop ---
     const renderLoop = () => {
       rafRef.current = requestAnimationFrame(renderLoop);
       renderer.render(scene, camera);
     };
     renderLoop();
 
-    // --- Resize ---
     const onResize = () => {
       if (!rendererRef.current || !cameraRef.current) return;
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -170,7 +172,6 @@ export default function SparkChest() {
     };
     window.addEventListener("resize", onResize);
 
-    // --- ScrollTrigger / Animationen ---
     const productOverview = scope.querySelector('[data-el="product-overview"]')!;
     const header1 = scope.querySelector('[data-el="header1"]')!;
     const header2 = scope.querySelector('[data-el="header2"]')!;
@@ -241,7 +242,6 @@ export default function SparkChest() {
           gsap.to(elements, { y: progress > trigger ? "0%" : "125%", ...animOptions });
         });
 
-        // Rotation beibehalten
         if (modelRef.current && progress > 0.05) {
           const rotationProgress = (progress - 0.05) / 0.95;
           const targetRotation = Math.PI * 3 * 4 * rotationProgress;
@@ -252,16 +252,12 @@ export default function SparkChest() {
           }
         }
 
-        // --- SCALE-LOGIK ---
-        // Ziel: 0.8 → (bei Tooltips) 0.4 → danach 0.6
-        // Fenster (anpassbar): weich schrumpfen 0.60–0.65, klein bleiben 0.65–0.85,
-        // weich wachsen 0.85–0.95 auf 0.6, danach 0.6 halten
         const pivot = pivotRef.current;
         if (pivot) {
-          const shrinkInStart = 0.60; // Start Schrumpfen
-          const shrinkInEnd = 0.65; // Ende Schrumpfen (0.4 erreicht)
-          const staySmallEnd = 0.85; // Bis hier klein bleiben (Texte sichtbar)
-          const growBackEnd = 0.95; // Bis hier auf 0.6 hochblenden
+          const shrinkInStart = 0.60;
+          const shrinkInEnd = 0.65;
+          const staySmallEnd = 0.85;
+          const growBackEnd = 0.95;
 
           let s = SCALE_START;
           if (progress < shrinkInStart) {
@@ -280,7 +276,6 @@ export default function SparkChest() {
       },
     });
 
-    // --- Cleanup ---
     return () => {
       try {
         ScrollTrigger.getAll().forEach((st) => st.kill());
@@ -321,22 +316,19 @@ export default function SparkChest() {
   return (
     <div ref={containerRef}>
       <section className={`${styles.section} ${styles.hero}`}>
-        {/* Headline-Zeile */}
         <div className={styles.titleRow}>
           <h1 className={styles.title}>
             <span>BMGF-XS01</span> Spark Chest
           </h1>
         </div>
 
-        {/* 3-Spalten-Layout */}
         <div className={styles.heroGrid}>
-          {/* Left: Need to know */}
           <aside className={styles.infoPanel}>
 
             <details className={styles.accordion} open>
               <summary>Product Information</summary>
               <div className={styles.accordionBody}>
-                High-density shell, modular mounts, replaceable plates.
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
               </div>
             </details>
 
@@ -355,7 +347,6 @@ export default function SparkChest() {
             </details>
           </aside>
 
-          {/* Center: Model + Frame Corners */}
           <div className={styles.modelFrame}>
             <div className={styles.frameCorner} />
             <div className={styles.frameCorner} />
@@ -363,13 +354,12 @@ export default function SparkChest() {
             <div className={styles.frameCorner} />
 
             <img
-              src="/images/parts-shop/BMGF-XS01_Spark_Chest.png"
-              alt="Spark Chest"
+              src={variants[selected].src}
+              alt={`Spark Chest – ${variants[selected].label}`}
               className={styles.modelImage}
             />
           </div>
 
-          {/* Right: Purchase Card */}
           <aside className={styles.purchaseCard} aria-label="Purchase options">
             <div className={styles.priceRow}>
               <span className={styles.currency}>CHF</span>
@@ -378,27 +368,33 @@ export default function SparkChest() {
 
             <div className={styles.optionBlock}>
               <span className={styles.optionLabel}>Color:</span>
-              <span className={styles.optionValue}>Orange</span>
+              <span className={styles.optionValue}>{variants[selected].label}</span>
             </div>
 
-            <div className={styles.thumbs}>
-              <button className={`${styles.thumb} ${styles.thumbActive}`}>
-                <img src="/images/parts-shop/BMGF-XS01_Spark_Chest.png" alt="Orange" />
-              </button>
-              <button className={styles.thumb}>
-                <img src="/images/parts-shop/BMGF-XS01_Spark_Chest.png" alt="Gray" />
-              </button>
-              <button className={styles.thumb}>
-                <img src="/images/parts-shop/BMGF-XS01_Spark_Chest.png" alt="Black" />
-              </button>
+            <div
+              className={styles.thumbs}
+              role="radiogroup"
+              aria-label="Choose color"
+            >
+              {variants.map((v, i) => (
+                <button
+                  key={v.label}
+                  type="button"
+                  role="radio"
+                  aria-checked={selected === i}
+                  aria-label={v.label}
+                  className={`${styles.thumb} ${selected === i ? styles.thumbActive : ""}`}
+                  onClick={() => setSelected(i)}
+                >
+                  <img src={v.src} alt={v.label} />
+                </button>
+              ))}
             </div>
 
             <div className={styles.ctaRow}>
               <button className={styles.cta}>Add to Cart</button>
               <button className={styles.settingsBtn}>
-                <span className={styles.settingsDot}></span>
-                <span className={styles.settingsDot}></span>
-                <span className={styles.settingsDot}></span>
+                <Settings size={26} />
               </button>
             </div>
           </aside>
@@ -420,11 +416,11 @@ export default function SparkChest() {
             <div className={styles.icon} data-el="tt1-icon" />
             <div className={styles.divider} />
             <div className="title">
-              <h2 className={styles.h2} data-el="tt1-title">Flash</h2>
+              <h2 className={styles.h2} data-el="tt1-title">BMGF-XS01</h2>
             </div>
             <div className={styles.description}>
               <p className={styles.p} data-el="tt1-desc">
-                Flash is a brand of compact, rechargeable, and portable battery packs. It is used in a variety of devices, including cameras, phones, and electric vehicles.
+                The Bipedal Maya Gundam Frame is a first generation mech from CxD Corp. XS01 is the first Experimental Shooter type of this series. It's chest piece has two points of articulation and is equipped with a nuclear reactor to power the XS01.
               </p>
             </div>
           </div>
@@ -433,11 +429,11 @@ export default function SparkChest() {
             <div className={styles.icon} data-el="tt2-icon" />
             <div className={styles.divider} />
             <div className="title">
-              <h2 className={styles.h2} data-el="tt2-title">Connectivity</h2>
+              <h2 className={styles.h2} data-el="tt2-title">Spark</h2>
             </div>
             <div className={styles.description}>
               <p className={styles.p} data-el="tt2-desc">
-                Seamless wireless pairing for quick sync with your devices and sensors during every workout.
+                The XS01 Unit is a Shooter type with various long and medium ranged weaponry. It's main feature is the Wing Unit. To increase mobility, the XS01 is capable to activate the WoL system. That system allows the nuclear reactor to overload it's output, which causes it to burst all that energy at once, creating wings made out of many Sparks.
               </p>
             </div>
           </div>

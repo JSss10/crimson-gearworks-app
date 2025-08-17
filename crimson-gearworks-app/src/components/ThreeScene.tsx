@@ -2,7 +2,6 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { useState, useRef, useEffect, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-//import { OrbitControls, Environment, Center, useGLTF } from '@react-three/drei';
 import type { ModelPart } from './Types';
 import styles from './ThreeScene.module.css';
 import Water1 from './shaders/water1_shader'
@@ -67,6 +66,7 @@ interface ThreeSceneProps {
 }
 
 export default function ThreeScene({ selectedParts, selectedPart, onPartClick, className }: ThreeSceneProps) {
+
   const containerRef = useRef<HTMLDivElement>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
@@ -75,65 +75,96 @@ export default function ThreeScene({ selectedParts, selectedPart, onPartClick, c
   const clockRef = useRef(new THREE.Clock());
 
   useEffect(() => {
+
+    // Scene Setup
     const scene = new THREE.Scene();
+    sceneRef.current = scene;
     
+
+    // Camera Setup
     const fov = 75;
     const aspect = window.innerWidth / window.innerHeight;
     const near = 0.1;
-    const far = 20;
-    const camPos = new THREE.Vector3(0.5, 0.25, -1);
+    const far = 3;
+    const camPos = new THREE.Vector3(-0.7, 0.7, 0);
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    const clock = new THREE.Clock();
+    camera.position.copy(camPos);
+    camera.lookAt(0, 1, 0);
+    cameraRef.current = camera;
     
-    camera.position.set(camPos.x, camPos.y, camPos.z);
-    camera.lookAt(0, 0, 0);
-    
+
+    // Renderer Setup
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(devicePixelRatio);
     renderer.toneMapping = THREE.NeutralToneMapping;
     renderer.toneMappingExposure = 1.5;
-
+    rendererRef.current = renderer;
+    
     if (containerRef.current) {
       containerRef.current.appendChild(renderer.domElement);
     }
     
-    // Controls
+
+    // Controls Setup
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.enableZoom = true;
+    controls.enablePan = false;
+    controls.dampingFactor = 0.1;
+    controls.maxZoom = 1;
+    controls.maxDistance = 1;
+    controls.maxPolarAngle = (Math.PI / 2) + 0.27;
+    controls.target.set(0, 0.3, 0);
+    controls.update();
+    controlsRef.current = controls;
+    
 
+    // Lighting
     const ambientLight = new THREE.AmbientLight(0xffffff, 1);
     ambientLight.position.set(0, 5, 0);
     scene.add(ambientLight);
     
+
+    // Water Setup
     const water = new Water1({ resolution: {x: 256, y: 256}})
     scene.add(water);
     
-    
-    rendererRef.current = renderer;
-    cameraRef.current = camera;
-    sceneRef.current = scene;
-    controlsRef.current = controls;
 
+    // Test
+    // const plane = new THREE.Mesh(
+    // new THREE.PlaneGeometry(2, 2),
+    // new THREE.MeshStandardMaterial({ color: 0x00aaff, side: THREE.DoubleSide })
+    // );
+    // plane.rotation.x = -Math.PI / 2;
+    // scene.add(plane);
+
+
+    // Anim Setup
     function animate() {
-      const elapsedTime = clock.getElapsedTime();
+      const elapsedTime = clockRef.current.getElapsedTime();
       water.update(elapsedTime);
       controls.update();
       renderer.render(scene, camera);
       requestAnimationFrame(animate);
     }
     
-    window.addEventListener("resize", () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
     animate();
 
+
+    // Window Resize
+    const handleResize = () => {
+      if (!cameraRef.current || !rendererRef.current) return;
+      cameraRef.current.aspect = window.innerWidth / window.innerHeight;
+      cameraRef.current.updateProjectionMatrix();
+      rendererRef.current.setSize(window.innerWidth, window.innerHeight);
+    };
+    window.addEventListener("resize", handleResize);
+    
+
+    // Cleanup
     return () => {
-      window.removeEventListener("resize", () => { /*...*/ });
+      window.removeEventListener("resize", handleResize);
       if (rendererRef.current) {
         rendererRef.current.dispose();
       }

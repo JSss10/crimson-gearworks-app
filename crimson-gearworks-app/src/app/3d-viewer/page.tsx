@@ -1,8 +1,7 @@
 'use client';
 
-import ThreeScene from '@/components/ThreeScene';
+import ThreeScene from '@/components/threeScene';
 import PartDetailsPanel from '@/components/customization/partDetailsPanel';
-
 import { ChangeEvent, useState } from 'react';
 import { Dropdown, DropdownContent, Searchbar, ToggleButton } from '@/components/ui/uiComponents';
 import { partTypeRegistry } from '@/components/Types';
@@ -11,8 +10,8 @@ import type { ModelPart } from '@/components/Types';
 import styles from '@/styles/viewer.module.css';
 
 export default function Index() {
-  const allParts = Object.values(partRegistry).flat();
 
+  const allParts = Object.values(partRegistry).flat();
   const [selectedPart, setSelectedPart] = useState<ModelPart | null>(null);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [activeParts, setActiveParts] = useState<ModelPart[]>(allParts);

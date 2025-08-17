@@ -1,5 +1,3 @@
-uniform sampler2D uPerlinTexture;
-
 uniform float uAmplitude;
 uniform float uTime;
 uniform float uFrequency;
@@ -8,7 +6,6 @@ uniform float uLacunarity;
 uniform float uSpeed;
 uniform int uIterations;
 
-varying float vElevation;
 varying vec3 vWorldPosition;
 varying vec3 vNormal;
 

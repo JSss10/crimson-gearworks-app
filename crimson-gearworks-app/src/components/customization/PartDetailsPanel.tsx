@@ -41,6 +41,7 @@ export default function PartDetailsPanel({ selectedPart, onWindowClose: onClose,
         flexShrink: 0,
       }}
     >
+      <div className={styles.logoOffset}></div>
       <div className={styles.panelHeader}>
         <h1 className={styles.panelTitle}>CUSTOMIZE</h1>
         <button onClick={onClose} className={styles.closeBtn}>

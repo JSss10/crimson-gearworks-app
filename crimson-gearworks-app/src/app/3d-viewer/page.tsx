@@ -109,7 +109,6 @@ export default function Index() {
           </div>
         </div>
       </div>
-
       <PartDetailsPanel selectedPart={selectedPart} onWindowClose={handlePanelClose} isOpen={isPanelOpen} onRemovePart={handleRemovePart} />
     </div>
   );

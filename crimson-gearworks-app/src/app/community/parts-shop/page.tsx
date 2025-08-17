@@ -1,8 +1,7 @@
-import PartsShop from "@/components/parts-shop/partsShop";
+import PartsShop from "@/components/parts-shop";
 
 export const metadata = {
-  title: "Parts-Shop",
-  description: "Game XY – Parts-Shop Grid with filters & search",
+  title: "Crimson Gearworks – Parts-Shop",
 };
 
 export default function PartsShopPage() {

@@ -1,9 +1,13 @@
-import { Mesh } from 'three';
-import { useState, useRef, Suspense } from 'react';
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { useState, useRef, useEffect, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Environment, Center, useGLTF } from '@react-three/drei';
+//import { OrbitControls, Environment, Center, useGLTF } from '@react-three/drei';
 import type { ModelPart } from './Types';
 import styles from './ThreeScene.module.css';
+import Water1 from './shaders/water1_shader'
+
+
 
 interface ModelComponentProps {
   modelPart: ModelPart;
@@ -11,40 +15,40 @@ interface ModelComponentProps {
   onClick?: () => void;
 }
 
-function ModelComponent({ modelPart, isSelected, onClick }: ModelComponentProps) {
-  const [hovered, setHovered] = useState(false);
-  const meshRef = useRef<Mesh>(null);
+// function ModelComponent({ modelPart, isSelected, onClick }: ModelComponentProps) {
+//   const [hovered, setHovered] = useState(false);
+//   const meshRef = useRef<THREE.Mesh>(null);
 
-  try {
-    const { scene } = useGLTF(modelPart.modelUrl);
-    const sceneClone = scene.clone();
+//   try {
+//     const { scene } = useGLTF(modelPart.modelUrl);
+//     const sceneClone = scene.clone();
 
-    return (
-      <primitive
-        ref={meshRef}
-        object={sceneClone}
-        onClick={onClick}
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}
-        scale={isSelected ? 1.1 : hovered ? 1.05 : 1}
-      />
-    );
-  } catch (e) {
-    return (
-      <mesh
-        ref={meshRef}
-        position={[0, 0, 0]}
-        onClick={onClick}
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}
-        scale={isSelected ? 1.1 : hovered ? 1.05 : 1}
-      >
-        <boxGeometry args={[0.5, 0.5, 0.5]} />
-        <meshStandardMaterial color={isSelected ? '#ff8c00' : hovered ? '#00ff37ff' : '#00e1ffff'} wireframe />
-      </mesh>
-    );
-  }
-}
+//     return (
+//       <primitive
+//         ref={meshRef}
+//         object={sceneClone}
+//         onClick={onClick}
+//         onPointerOver={() => setHovered(true)}
+//         onPointerOut={() => setHovered(false)}
+//         scale={isSelected ? 1.1 : hovered ? 1.05 : 1}
+//       />
+//     );
+//   } catch (e) {
+//     return (
+//       <mesh
+//         ref={meshRef}
+//         position={[0, 0, 0]}
+//         onClick={onClick}
+//         onPointerOver={() => setHovered(true)}
+//         onPointerOut={() => setHovered(false)}
+//         scale={isSelected ? 1.1 : hovered ? 1.05 : 1}
+//       >
+//         <boxGeometry args={[0.5, 0.5, 0.5]} />
+//         <meshStandardMaterial color={isSelected ? '#ff8c00' : hovered ? '#00ff37ff' : '#00e1ffff'} wireframe />
+//       </mesh>
+//     );
+//   }
+// }
 
 function PlaceholderModel() {
   return (
@@ -63,33 +67,78 @@ interface ThreeSceneProps {
 }
 
 export default function ThreeScene({ selectedParts, selectedPart, onPartClick, className }: ThreeSceneProps) {
-  return (
-    <div className={[styles.fullSize, className].filter(Boolean).join(' ')}>
-      <Canvas camera={{ position: [5, 2, 5], fov: 55 }} style={{ background: '#1f1e1cff' }}>
-        <ambientLight intensity={0.4} />
-        <directionalLight position={[10, 10, 5]} intensity={1} />
-        <directionalLight position={[-10, -10, -5]} intensity={0.5} />
+  const containerRef = useRef<HTMLDivElement>(null);
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const sceneRef = useRef<THREE.Scene | null>(null);
+  const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
+  const controlsRef = useRef<OrbitControls | null>(null);
+  const clockRef = useRef(new THREE.Clock());
 
-        <Suspense fallback={<PlaceholderModel />}>
-          <Center>
-            {selectedParts.length > 0 ? (
-              selectedParts.map((part) => (
-                <ModelComponent
-                  key={part.id}
-                  modelPart={part}
-                  isSelected={selectedPart?.id === part.id}
-                  onClick={() => onPartClick?.(part)}
-                />
-              ))
-            ) : (
-              <PlaceholderModel />
-            )}
-          </Center>
-          <Environment preset="night" />
-        </Suspense>
+  useEffect(() => {
+    const scene = new THREE.Scene();
+    
+    const fov = 75;
+    const aspect = window.innerWidth / window.innerHeight;
+    const near = 0.1;
+    const far = 20;
+    const camPos = new THREE.Vector3(0.5, 0.25, -1);
+    const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    const clock = new THREE.Clock();
+    
+    camera.position.set(camPos.x, camPos.y, camPos.z);
+    camera.lookAt(0, 0, 0);
+    
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(devicePixelRatio);
+    renderer.toneMapping = THREE.NeutralToneMapping;
+    renderer.toneMappingExposure = 1.5;
 
-        <OrbitControls enablePan enableZoom enableRotate maxPolarAngle={Math.PI} minPolarAngle={0} />
-      </Canvas>
-    </div>
-  );
-}
+    if (containerRef.current) {
+      containerRef.current.appendChild(renderer.domElement);
+    }
+    
+    // Controls
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.enableZoom = true;
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    ambientLight.position.set(0, 5, 0);
+    scene.add(ambientLight);
+    
+    const water = new Water1({ resolution: {x: 256, y: 256}})
+    scene.add(water);
+    
+    
+    rendererRef.current = renderer;
+    cameraRef.current = camera;
+    sceneRef.current = scene;
+    controlsRef.current = controls;
+
+    function animate() {
+      const elapsedTime = clock.getElapsedTime();
+      water.update(elapsedTime);
+      controls.update();
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+    
+    window.addEventListener("resize", () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    animate();
+
+    return () => {
+      window.removeEventListener("resize", () => { /*...*/ });
+      if (rendererRef.current) {
+        rendererRef.current.dispose();
+      }
+    };
+  }, []);
+
+  return <div ref={containerRef} className={className}></div>;
+};

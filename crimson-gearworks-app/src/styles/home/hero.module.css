@@ -7,7 +7,6 @@
   --font-wordmark-max: 8rem;
 }
 
-/* Utility for accessible, visual-hidden text */
 .srOnly {
   position: absolute !important;
   width: 1px;
@@ -155,55 +154,5 @@
   .wordmark {
     font-size: clamp(7rem, 8vw, 9rem);
     letter-spacing: 0.08em;
-  }
-}
-
-@media (min-width: 1536px) {
-  .content {
-    padding-inline: clamp(48px, 7vw, 120px);
-  }
-}
-
-/* -------- Container queries (optional, additive) -------- */
-@container (max-width: 600px) {
-  .wordmark {
-    gap: 0.75rem;
-  }
-}
-
-@container (min-width: 900px) {
-  .wordmark {
-    gap: 2rem;
-  }
-}
-
-/* -------- User preferences / Accessibility -------- */
-@media (prefers-contrast: more) {
-  .overlay {
-    background: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.6) 0%,
-      rgba(0, 0, 0, 0.65) 50%,
-      rgba(0, 0, 0, 0.7) 100%
-    );
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .video {
-    display: none;
-  }
-  .videoWrap {
-    background: #000;
-  }
-}
-
-/* Experimental but shipping in modern browsers: save data */
-@media (prefers-reduced-data: reduce) {
-  .video {
-    display: none;
-  }
-  .videoWrap {
-    background: url("/medias/nature.jpg") center/cover no-repeat;
   }
 }

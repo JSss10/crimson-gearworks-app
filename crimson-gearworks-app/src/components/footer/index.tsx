@@ -1,6 +1,6 @@
-import React from 'react';
-import Content from './content';
-import styles from '@/styles/footer/index.module.css';
+import React from "react";
+import Content from "./content";
+import styles from "@/styles/footer/index.module.css";
 
 export default function Footer() {
   return (

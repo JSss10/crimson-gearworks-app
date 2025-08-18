@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import styles from "@/styles/contact/index.module.css";
 import { FaInstagram as Instagram, FaDiscord as Discord, FaSteam as Steam } from "react-icons/fa";
@@ -61,7 +61,7 @@ export default function ContactPage() {
                   className={`${styles.input} ${styles.textarea}`}
                   placeholder="Message"
                   rows={6}
-                  style={{ resize: 'none' }}
+                  style={{ resize: "none" }}
                 />
               </label>
 
@@ -69,7 +69,7 @@ export default function ContactPage() {
                 <button type="button" className={styles.ctaButton}>
                   <span className={styles.ctaIcon} aria-hidden>
                     <svg viewBox="0 0 24 24" width="24" height="24">
-                      <circle cx="12" cy="12" r="9" fill="currentColor" opacity="0.15" />
+                      <circle cx="12" cy="12" r="12" fill="#000000" />
                       <path d="M8 12h8M13 8l3.9 4L13 16" stroke="currentColor" strokeWidth="1.7" fill="none" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </span>

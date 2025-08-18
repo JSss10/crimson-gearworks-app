@@ -29,7 +29,7 @@ export type PolaroidSceneProps = {
 export default function PolaroidScene({
   title = "Polaroid",
   imagesCount = 12,
-  imagePathTemplate = "/images/events/img{n}.jpg",
+  imagePathTemplate = "/images/about-us/insight{n}.png",
   imageSrcs,
 }: PolaroidSceneProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);

@@ -11,7 +11,7 @@ export default function AboutUsPage() {
         <div className={styles.mediaWrap} aria-hidden="true">
           <div className={styles.mediaInner}>
             <Image
-              src="/images/events/img1.jpg"
+              src="/images/about-us/team.png"
               alt=""
               fill
               priority
@@ -34,7 +34,7 @@ export default function AboutUsPage() {
         </div>
       </section>
       <Team />
-      <PolaroidScene title="Our spirit" imagesCount={12} imagePathTemplate="/images/events/img{n}.jpg" />
+      <PolaroidScene title="Our spirit" imagesCount={12} imagePathTemplate="/images/about-us/insight{n}.png" />
     </>
   );
 }

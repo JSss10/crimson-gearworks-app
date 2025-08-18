@@ -5,17 +5,17 @@ import gsap from "gsap";
 import styles from "@/styles/features/team-reveal.module.css";
 import Character from "@/components/features/character-text-scroll";
 
-const paragraph = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+const paragraph = "We are a small, close-knit indie game development studio with expertise in game art, programming, web development, 3D resin printing, and audio production. At Crimson Gearworks, we believe in open, transparent collaboration with our community. We put players and their creativity first – by staying closely connected to our audience and hosting events like art submissions, we invite them to actively shape both their journey and ours."
 
 export type TeamMember = { name: string; img: string };
 
 const TEAM: TeamMember[] = [
-  { name: "Tim", img: "/images/about-us/Tim.png" },
-  { name: "Kira", img: "/images/about-us/Kira.png" },
-  { name: "Neville", img: "/images/about-us/Neville.png" },
-  { name: "Noel", img: "/images/about-us/Noel.png" },
-  { name: "Emanuel", img: "/images/about-us/Emanuel.png" },
-  { name: "Jessica", img: "/images/about-us/Jessica.png" },
+  { name: "Tim", img: "/images/about-us/tim.png" },
+  { name: "Kira", img: "/images/about-us/kira.png" },
+  { name: "Neville", img: "/images/about-us/neville.png" },
+  { name: "Noel", img: "/images/about-us/noel.png" },
+  { name: "Emanuel", img: "/images/about-us/emanuel.png" },
+  { name: "Jessica", img: "/images/about-us/jessica.png" },
 ];
 
 function useIsDesktop(initial = false) {

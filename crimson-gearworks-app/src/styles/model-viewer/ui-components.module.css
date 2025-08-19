@@ -8,66 +8,68 @@
   --white: #ffffff;
 }
 
-.fullWidth { 
-  width: 100%; 
+.fullWidth {
+  width: 100%;
 }
 
 .toggleBtn {
-  width: 100%; 
-  display: flex; 
-  align-items: center; 
+  width: 100%;
+  display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding: 0.75rem; 
-  background: var(--orange-500); 
+  padding: 0.75rem;
+  background: var(--color-secondary);
   border: none;
   border-radius: 1.5rem;
-  color: var(--white); 
-  font-weight: 500; 
-  transition: opacity .15s ease;
+  color: var(--white);
+  font-weight: 500;
+  transition: opacity 0.15s ease;
 }
 
-.toggleBtn:hover { 
-  opacity: .8; 
+.toggleBtn:hover {
+  opacity: 0.8;
 }
 
-.iconSm { 
-  width: 1rem; 
-  height: 1rem; 
+.iconSm {
+  width: 1rem;
+  height: 1rem;
 }
 
 .dropdownPanel {
-  margin-top: 0.25rem; 
-  background: var(--zinc-800); 
+  margin-top: 0.25rem;
+  background: var(--zinc-800);
   border: 1px solid var(--zinc-600);
-  border-radius: 1.5rem; 
+  border-radius: 1.5rem;
   overflow: hidden;
 }
 
-.dropdownItem { 
-  list-style: none; 
+.dropdownItem {
+  list-style: none;
 }
 
 .dropdownItemBtn {
-  width: 100%; 
-  text-align: left; 
-  padding: 0.75rem; 
-  background: var(--zinc-800); 
-  transition: background-color .15s ease, color .15s ease;
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem;
+  background: var(--bg-color-primary);
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
   border: none;
   color: var(--gray-200);
 }
 
-.dropdownItem:last-child .dropdownItemBtn { 
-  border-bottom: 0; 
+.dropdownItem:last-child .dropdownItemBtn {
+  border-bottom: 0;
 }
 
-.dropdownItemBtn:hover { 
-  background: rgba(255, 255, 255, 0.1); 
-  color: var(--white); 
+.dropdownItemBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
 }
 
-.dropdownItemTitle { 
-  font-weight: 500; 
+.dropdownItemTitle {
+  font-weight: 500;
 }
 
 .searchBarItem {
@@ -75,9 +77,11 @@
   display: flex;
   align-items: center;
   padding: 0.75rem;
-  background-color: var(--zinc-900);
+  background-color: var(--bg-color-primary);
   border-radius: 0.5rem;
-  transition: color 0.2s, opacity 0.2s;
+  transition:
+    color 0.2s,
+    opacity 0.2s;
   color: var(--white);
   font-weight: 500;
 }

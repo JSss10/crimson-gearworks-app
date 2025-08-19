@@ -6,14 +6,14 @@ import TextClipMask from "@/components/features/text-clip-mask";
 import HoverGallery from "@/components/features/hover-gallery";
 import type { GameShowcaseItem } from "@/components/features/game-showcase";
 
-const paragraph = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+const paragraph = "The general artstyle we strive for is a stylized semi-realistic look for the overall visuals of the game. Main inspirations for that look are both “Granblue Fantasy: Relink” by Cygames and “Honkai: Star Rail” by miHoYo. The player’s controlled mecha is largely inspired by various bipedal mechas in media such as “Armored Core”, “Gundam” and other works of that genre. There’s also a heavy emphasis placed on the mechanical aspect being somewhat grounded in mechanical realism. The monster’s overall design is inspired by lava- and fire-themed creatures from the aforementioned game “Granblue Fantasy: Relink” and “Monster Hunter”.";
 
 const items: GameShowcaseItem[] = [
-  { title1: "Lorem ipsum", title2: "Lorem", src: "img1.jpg" },
-  { title1: "Lorem ipsum", title2: "Lorem", src: "img1.jpg" },
-  { title1: "Lorem ipsum", title2: "Lorem", src: "img1.jpg" },
-  { title1: "Lorem ipsum", title2: "Lorem", src: "img1.jpg" },
-  { title1: "Lorem ipsum", title2: "Lorem", src: "img1.jpg" },
+  { title1: "The Volcanic", title2: "Plateau", src: "img1.jpg" },
+  { title1: "The", title2: "Beam Rifle", src: "img1.jpg" },
+  { title1: "Quickboost", title2: "Thrusters", src: "img1.jpg" },
+  { title1: "The Cannon is", title2: "a ranged module", src: "img1.jpg" },
+  { title1: "Single", title2: "player experience", src: "img1.jpg" },
 ];
 
 export default function GameInfoPage() {
@@ -23,7 +23,7 @@ export default function GameInfoPage() {
         <div className={styles.mediaWrap} aria-hidden="true">
           <div className={styles.mediaInner}>
             <Image
-              src="/images/events/img1.jpg"
+              src="/images/game-info/game-info-hero.png"
               alt=""
               fill
               priority
@@ -37,11 +37,10 @@ export default function GameInfoPage() {
         <div className={styles.hero}>
           <div className={styles.heroInner}>
             <h1 className={styles.titleLine}>
-              <span className={styles.orange}>Game</span>
-              <span className={styles.white}>name</span>
+              <span className={styles.orange}>Project</span>
             </h1>
             <h1 className={styles.titleLineTwo}>
-              <span>The game</span>
+              <span>Assemblance</span>
             </h1>
           </div>
         </div>

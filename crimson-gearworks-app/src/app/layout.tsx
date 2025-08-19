@@ -19,7 +19,7 @@ const exo2 = Exo_2({
 
 export const metadata: Metadata = {
   title: "Crimson Gearworks",
-  description: "Test meta description",
+  description: "A third-person action game – experience mecha vs monster combat",
 };
 
 export default function RootLayout({

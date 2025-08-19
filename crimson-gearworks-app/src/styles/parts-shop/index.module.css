@@ -1,7 +1,7 @@
 .container {
   min-height: 100dvh;
   padding: 0 clamp(16px, 4vw, 60px);
-  margin-top: clamp(64px, 12vh, 20vh);
+  margin-top: clamp(64px, 16vh, 20vh);
   padding-bottom: calc(clamp(80px, 12vh, 160px) + env(safe-area-inset-bottom));
 }
 

@@ -22,16 +22,16 @@ interface ModalType {
 
 
 const competitors: CompetitorType[] = [
-  { title: "Kaijura", location: "Los Angeles | USA", src: "test.png", color: "#000000" },
-  { title: "Unit_04X", location: "Seoul | South Korea", src: "test.png", color: "#000000" },
-  { title: "TheSeer", location: "Beijing | China", src: "test.png", color: "#000000" },
-  { title: "TheSeer", location: "Beijing | China", src: "test.png", color: "#000000" },
-  { title: "TheSeer", location: "Beijing | China", src: "test.png", color: "#000000" },
-  { title: "TheSeer", location: "Beijing | China", src: "test.png", color: "#000000" },
-  { title: "TheSeer", location: "Beijing | China", src: "test.png", color: "#000000" },
-  { title: "TheSeer", location: "Beijing | China", src: "test.png", color: "#000000" },
-  { title: "TheSeer", location: "Beijing | China", src: "test.png", color: "#000000" },
-  { title: "Echo-9", location: "New Delhi | India", src: "test.png", color: "#000000" }
+  { title: "Kaijura", location: "Los Angeles | USA", src: "leaderboard-project-visual.png", color: "#000000" },
+  { title: "Unit_04X", location: "Seoul | South Korea", src: "leaderboard-project-visual.png", color: "#000000" },
+  { title: "TheSeer", location: "Beijing | China", src: "leaderboard-project-visual.png", color: "#000000" },
+  { title: "TheSeer", location: "Beijing | China", src: "leaderboard-project-visual.png", color: "#000000" },
+  { title: "TheSeer", location: "Beijing | China", src: "leaderboard-project-visual.png", color: "#000000" },
+  { title: "TheSeer", location: "Beijing | China", src: "leaderboard-project-visual.png", color: "#000000" },
+  { title: "TheSeer", location: "Beijing | China", src: "leaderboard-project-visual.png", color: "#000000" },
+  { title: "TheSeer", location: "Beijing | China", src: "leaderboard-project-visual.png", color: "#000000" },
+  { title: "TheSeer", location: "Beijing | China", src: "leaderboard-project-visual.png", color: "#000000" },
+  { title: "Echo-9", location: "New Delhi | India", src: "leaderboard-project-visual.png", color: "#000000" }
 ];
 
 

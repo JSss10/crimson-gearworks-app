@@ -5,7 +5,7 @@ import gsap from "gsap";
 import styles from "@/styles/features/team-reveal.module.css";
 import Character from "@/components/features/character-text-scroll";
 
-const paragraph = "We are a small, close-knit indie game development studio with expertise in game art, programming, web development, 3D resin printing, and audio production. At Crimson Gearworks, we believe in open, transparent collaboration with our community. We put players and their creativity first – by staying closely connected to our audience and hosting events like art submissions, we invite them to actively shape both their journey and ours."
+const paragraph = "We are a small, close-knit indie game development studio with expertise in game art, programming, web development, 3D resin printing, and audio production. At Crimson Gearworks, we believe in open, transparent collaboration with our community. We put players and their creativity first – by staying closely connected to our audience and hosting events like art submissions, we invite them to actively shape both their journey and ours.";
 
 export type TeamMember = { name: string; img: string };
 
@@ -61,8 +61,7 @@ export default function TeamReveal() {
           gsap.registerPlugin(SplitTextCtor);
           usedSplitText = true;
         }
-      } catch {
-      }
+      } catch { }
 
       if (usedSplitText) {
         const lettersBins: HTMLElement[][] = [];
@@ -98,9 +97,7 @@ export default function TeamReveal() {
     return () => {
       mounted = false;
       teardowns.forEach((fn) => {
-        try {
-          fn();
-        } catch { }
+        try { fn(); } catch { }
       });
       lettersPerHeadingRef.current = [];
     };

@@ -1,26 +1,30 @@
 .section {
   position: relative;
-  width: 100vw;
-  height: 140vh;
+  width: 100%;
+  height: min(120dvh, 1200px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2.5em;
+  gap: clamp(1rem, 2.5vw, 2.5em);
   overflow: hidden;
+  padding: clamp(0.5rem, 2vw, 2rem);
 }
 
 .profileImages {
-  width: max-content;
+  width: 100%;
+  max-width: 1100px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  gap: clamp(0.25rem, 1.2vw, 0.75rem);
 }
 
 .img {
   position: relative;
-  width: 70px;
-  height: 70px;
+  width: clamp(52px, 6.5vw, 80px);
+  height: clamp(52px, 6.5vw, 80px);
   padding: 5px;
   cursor: pointer;
   will-change: width, height;
@@ -37,19 +41,20 @@
 .profileNames {
   position: relative;
   width: 100%;
-  height: 20rem;
+  height: clamp(3rem, 16vw, 20rem);
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
   overflow: hidden;
 }
 
-.name h1, .defaultName h1 {
+.name h1,
+.defaultName h1 {
   position: absolute;
   width: 100%;
   text-align: center;
   text-transform: uppercase;
-  font-size: 20rem;
+  font-size: clamp(2.5rem, 16vw, 20rem);
   font-weight: 900;
-  letter-spacing: -0.5rem;
+  letter-spacing: clamp(-0.05rem, -0.3vw, -0.5rem);
   line-height: 1;
   color: var(--color-primary);
   user-select: none;
@@ -59,7 +64,7 @@
 
 .defaultName h1 {
   transform: translateY(-100%);
-  color: var(--text-color-primary)!important;
+  color: var(--text-color-primary) !important;
 }
 
 .letter {
@@ -69,29 +74,18 @@
   will-change: transform;
 }
 
-@media (max-width: 900px) {
-  .section {
-    flex-direction: column-reverse;
-  }
-
-  .profileImages {
-    flex-wrap: wrap;
-    max-width: 90%;
-    justify-content: center;
-  }
-
+@media (prefers-reduced-motion: reduce) {
   .img {
-    width: 60px;
-    height: 60px;
-    padding: 2.5px;
+    transition: none;
   }
-
-  .name h1 {
-    font-size: 4rem;
-    letter-spacing: 0;
+  .letter {
+    transition: none;
   }
+}
 
-  .profileNames {
-    height: 4rem;
+@media (max-width: 1024px) {
+  .section {
+    height: auto;
+    padding: 150px 0;
   }
 }

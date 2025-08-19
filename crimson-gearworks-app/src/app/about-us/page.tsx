@@ -1,8 +1,8 @@
-import React from 'react';
-import Image from 'next/image';
-import styles from '@/styles/about-us/index.module.css';
-import Team from '@/components/features/team-reveal';
-import PolaroidScene from '@/components/features/polaroid-scene';
+import React from "react";
+import Image from "next/image";
+import styles from "@/styles/about-us/index.module.css";
+import Team from "@/components/features/team-reveal";
+import PolaroidScene from "@/components/features/polaroid-scene";
 
 export default function AboutUsPage() {
   return (
@@ -16,7 +16,8 @@ export default function AboutUsPage() {
               fill
               priority
               sizes="100vw"
-              className={styles.media} />
+              className={styles.media}
+            />
           </div>
           <div className={styles.overlay} />
         </div>

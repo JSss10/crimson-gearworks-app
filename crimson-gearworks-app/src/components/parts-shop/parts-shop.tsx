@@ -6,6 +6,7 @@ import PartCard from "@/components/parts-shop/part-card";
 import { parts } from "@/data/parts";
 import type { Category } from "@/types/shop-categories";
 import { CATEGORIES } from "@/types/shop-categories";
+import { FaCircleXmark } from "react-icons/fa6";
 
 function normalize(str: string | null | undefined) {
   return (str ?? "").toLowerCase().normalize("NFKD");
@@ -69,7 +70,7 @@ export default function PartsShop() {
           </h1>
         </div>
       </div>
-      <nav className={styles.toolbar} aria-label="Kategorien">
+      <nav className={styles.toolbar} aria-label="categories">
         <ul className={styles.categories}>
           {(["ALL", ...CATEGORIES] as Category[]).map((cat) => (
             <li key={cat}>
@@ -104,7 +105,7 @@ export default function PartsShop() {
               aria-label="Suche löschen"
               title="Leeren"
             >
-              ×
+              <FaCircleXmark size={16} />
             </button>
           )}
         </form>

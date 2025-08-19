@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "@/styles/parts-shop/index.module.css";
 import type { Part } from "@/types/shop-categories";
+import { FaArrowRight } from "react-icons/fa6";
 
 interface Props { part: Part; featured?: boolean; wide?: boolean; imageOnly?: boolean; }
 
@@ -66,9 +67,9 @@ export default function PartCard({ part, featured, wide, imageOnly }: Props) {
       {featured && (
         <div className={styles.ctaDock} aria-hidden>
           <button type="button" className={styles.ctaBtn} aria-label="Open details">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M7 17 L17 7 M9 7h8v8" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <span>
+              <FaArrowRight size={30} />
+            </span>
           </button>
         </div>
       )}

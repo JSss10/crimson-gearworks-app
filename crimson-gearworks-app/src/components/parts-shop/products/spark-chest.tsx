@@ -7,7 +7,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
-import { Settings } from "lucide-react";
+import { FaGears } from "react-icons/fa6";
 
 export default function SparkChest() {
   const variants = useMemo(
@@ -435,7 +435,7 @@ export default function SparkChest() {
             <div className={styles.ctaRow}>
               <button className={styles.cta}>Add to Cart</button>
               <button className={styles.settingsBtn} aria-label="Open settings">
-                <Settings size={26} />
+                <FaGears size={26} />
               </button>
             </div>
           </aside>

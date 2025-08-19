@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import styles from "@/styles/navbar/index.module.css";
+import { FaSteam } from "react-icons/fa6";
 
 function useMediaQuery(query: string) {
   const [matches, setMatches] = useState(false);
@@ -271,7 +272,7 @@ export default function Navbar() {
             >
               <span className={styles.ctaButtonText}>Play now on Steam</span>
               <span className={styles.ctaButtonArrowContainer}>
-                <Image src="/logo/steam-logo.svg" alt="Steam Logo" width={24} height={24} />
+                <FaSteam size={24} />
               </span>
             </a>
           </li>

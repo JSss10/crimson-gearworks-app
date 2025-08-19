@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "@/styles/contact/index.module.css";
-import { FaInstagram as Instagram, FaDiscord as Discord, FaSteam as Steam } from "react-icons/fa";
+import { FaInstagram as Instagram, FaDiscord as Discord, FaSteam as Steam, FaArrowRight, FaChevronDown } from "react-icons/fa6";
 
 export default function ContactPage() {
   return (
@@ -52,7 +52,7 @@ export default function ContactPage() {
                     <option>Need Help</option>
                     <option>Something Else</option>
                   </select>
-                  <span aria-hidden className={styles.chevron}>▾</span>
+                  <span aria-hidden className={styles.chevron}><FaChevronDown size={10} /></span>
                 </div>
               </label>
 
@@ -68,10 +68,7 @@ export default function ContactPage() {
               <div className={styles.ctaRow}>
                 <button type="button" className={styles.ctaButton}>
                   <span className={styles.ctaIcon} aria-hidden>
-                    <svg viewBox="0 0 24 24" width="24" height="24">
-                      <circle cx="12" cy="12" r="12" fill="#000000" />
-                      <path d="M8 12h8M13 8l3.9 4L13 16" stroke="currentColor" strokeWidth="1.7" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
+                    <FaArrowRight size={16} />
                   </span>
                   <span>LET’S CHAT</span>
                 </button>

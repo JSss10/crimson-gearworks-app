@@ -112,15 +112,15 @@
 
 .clearBtn {
   position: absolute;
-  right: 12px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
   width: 32px;
   height: 32px;
   border-radius: 10px;
-  border: 1px solid var(--muted);
-  background: #1a1a1a;
-  color: #bbb;
+  border: none;
+  background: none;
+  color: #fff;
   cursor: pointer;
 }
 .clearBtn:hover {
@@ -281,7 +281,6 @@
   background: #000;
   border-radius: 10px 0 0 0;
   padding: 30px 15px 15px 30px;
-  z-index: 1;
 }
 .ctaBtn {
   width: 60px;
@@ -294,13 +293,13 @@
   place-items: center;
   cursor: pointer;
 }
+.ctaBtn span {
+  transform: rotate(-45deg);
+}
+
 .ctaBtn:hover {
   filter: brightness(1.05);
   transform: translateY(-1px);
-}
-.ctaBtn svg {
-  width: 28px;
-  height: 28px;
 }
 
 .stretchedLink {

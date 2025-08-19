@@ -1,9 +1,11 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import styles from '@/styles/leaderboard/index.module.css';
-import Competitor from '@/components/leaderboard/competitor';
-import Modal from '@/components/features/modal';
+
+import { useState } from "react";
+import styles from "@/styles/leaderboard/index.module.css";
+import Competitor from "@/components/leaderboard/competitor";
+import Modal from "@/components/features/modal";
+
 
 interface CompetitorType {
   title: string;
@@ -12,13 +14,15 @@ interface CompetitorType {
   color: string;
 }
 
+
 interface ModalType {
   active: boolean;
   index: number;
 }
 
+
 const competitors: CompetitorType[] = [
-  { title: "Kaijura", location: "Los Angeles | USA", src: "test.png", color: "#000000" },
+  { title: "Kaijura", location: "Los Angeles | USA", src: "test.png", color: "#000000" },
   { title: "Unit_04X", location: "Seoul | South Korea", src: "test.png", color: "#000000" },
   { title: "TheSeer", location: "Beijing | China", src: "test.png", color: "#000000" },
   { title: "TheSeer", location: "Beijing | China", src: "test.png", color: "#000000" },
@@ -30,8 +34,10 @@ const competitors: CompetitorType[] = [
   { title: "Echo-9", location: "New Delhi | India", src: "test.png", color: "#000000" }
 ];
 
+
 export default function LeaderboardPage() {
   const [modal, setModal] = useState<ModalType>({ active: false, index: 0 });
+
 
   return (
     <div className={styles.main}>

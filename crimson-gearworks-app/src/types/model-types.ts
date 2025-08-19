@@ -1,16 +1,17 @@
-// Model Related Types
+/*
 
+Model Related Types
+
+*/
 
 export interface PartSetType {
     setName: string;
 }
 
-
 export interface ModelPartType {
     id: string;
     name: string;
 }
-
 
 export interface ModelAttachmentPointType {
     name: string;
@@ -18,11 +19,8 @@ export interface ModelAttachmentPointType {
     rotation?: [number, number, number];
 }
 
-
 export type PartSetID = typeof partSetRegistry[number]["setName"];
 export type PartRegistryType = { [key in PartSetID]: ModelPart[];};
-
-
 
 export const partTypeRegistry = [
         { id: "head", name: "Head" },
@@ -41,14 +39,16 @@ export const partTypeRegistry = [
         { id: "foot-right", name: "Right Foot" }
 ] as const;
 
-
 export const partSetRegistry = [
-    { setName: "Nephilim" }
+    { setName: "Placeholder" },
+    { setName: "Nephilim" },
+    { setName: "Cahrama" },
+    { setName: "Photon" },
+    { setName: "Manus" },
+    { setName: "T9X" } 
 ] as const;
 
-
 export type PartTypeID = typeof partTypeRegistry[number]["id"];
-
 
 export interface ModelPart {
     id: string;
@@ -62,6 +62,9 @@ export interface ModelPart {
     // Type of part (head, torso, etc.)
     partType: PartTypeID;
 
+    // If this is loaded per default into the scene
+    isDefault?: boolean
+
     // Color, Texture or Sticker customization options
     customizationOptions?: CustomizationOption[];
 
@@ -71,14 +74,21 @@ export interface ModelPart {
     // Overrides for attachment points
     attachmentPointOverrides?: ModelAttachmentPointType[];
     
+    // If I choose to preload ALL parts, this is useful
     isVisible?: boolean;
+
+    // Used to control part-detail panel state 
     isSelected?: boolean;
+
+    // Demo purpose only - if a user hasn't unlocked it yet
     isLocked?: boolean;
 }
 
+/* 
 
-// Model Customization
+Model Customization 
 
+*/
 
 export const customizationTypes = [
     { id: "color", name: "Color" },

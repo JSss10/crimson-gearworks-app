@@ -1,3 +1,11 @@
+/*
+
+This "water1_shader.ts was written by
+Dan Greenheck on Youtube (2025). 
+Source: https://www.youtube.com/watch?v=jK4uXGY07vA&t=1585s
+
+*/
+
 uniform float uAmplitude;
 uniform float uTime;
 uniform float uFrequency;

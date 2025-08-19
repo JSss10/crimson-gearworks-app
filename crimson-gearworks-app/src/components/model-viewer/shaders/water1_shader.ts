@@ -1,14 +1,22 @@
+/*
+
+This "water1_shader.ts was written by
+Dan Greenheck on Youtube (2025). 
+Source: https://www.youtube.com/watch?v=jK4uXGY07vA&t=1585s
+
+*/
+
 import * as THREE from 'three';
 import vertexShader from './water1_vert.glsl';
 import fragmentShader from './water1_frag.glsl';
 
 export default class Water1 extends THREE.Mesh {
     material: THREE.ShaderMaterial;
-    constructor(options: { resolution: { x: number | undefined; y: number | undefined; }; }) {
+    constructor(options: { resolution: { x: number | undefined; y: number | undefined; }; }, width: number, height: number) {
         super();
         this.material = new THREE.ShaderMaterial({
             uniforms: {
-                // f
+                // frag
                 uOpacity:           { value: 0.3 },
                 uSurfaceColor:      { value: new THREE.Color(1, 0.224, 0) },
                 uTroughColor:       { value: new THREE.Color(0, 0, 0) },
@@ -21,7 +29,7 @@ export default class Water1 extends THREE.Mesh {
                 uFresnelScale:      { value: 0.5 },
                 uFresnelPower:      { value: 1.0 },
 
-                // v
+                // vert
                 uAmplitude:         { value: 0.07 },
                 uTime:              { value: 0.1 },
                 uFrequency:         { value: 0.5 },
@@ -35,7 +43,7 @@ export default class Water1 extends THREE.Mesh {
             transparent: true
         });
 
-        this.geometry = new THREE.PlaneGeometry(2, 2, options.resolution.x, options.resolution.y);
+        this.geometry = new THREE.PlaneGeometry(width, height, options.resolution.x, options.resolution.y);
         this.rotation.x = Math.PI / 2;
     }
 
@@ -43,4 +51,5 @@ export default class Water1 extends THREE.Mesh {
         this.material.uniforms.uTime.value = time;
     }
 }
+
 

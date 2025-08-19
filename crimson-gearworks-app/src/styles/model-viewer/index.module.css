@@ -1,3 +1,9 @@
+/*
+
+The Tailwind CSS-to-CSS conversion for this class was performed by ChatGPT
+
+*/
+
 :root {
   --gray-950: #0a0a0a;
   --orange-500: #f97316;
@@ -15,7 +21,6 @@
   overflow: hidden;
 }
 
-/* Sidebar widths: base 20rem (w-80); lg -> 25vw; xl -> 20rem */
 .sidebar {
   width: 20rem;
   padding: 0.5rem;
@@ -114,4 +119,36 @@
 
 .logoOffset {
   margin-bottom: 11rem;
+}
+
+.loadingText {
+  color: var(--orange-500);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  animation: pulse 2s infinite;
+}
+
+.errorText {
+  color: #ef4444; /* red-500 */
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.primaryBtn:disabled {
+  background: var(--gray-500);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.primaryBtn:disabled:hover {
+  background: var(--gray-500);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }

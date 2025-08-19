@@ -22,8 +22,8 @@ export default function CustomizationGroup({
       <div className={styles.spaceY2}>
         {options.map((option) => (
           <div key={option.id} className={styles.optionRow}>
-            <div className={styles.iconWrapper}>
-              <div style={{ backgroundColor: option.color }}>{option.icon}</div>
+            <div className={styles.iconWrapper} style={{ backgroundColor: option.color }}>
+              <div>{option.icon}</div>
             </div>
             <button
               onClick={() => onOptionSelect(option.id)}

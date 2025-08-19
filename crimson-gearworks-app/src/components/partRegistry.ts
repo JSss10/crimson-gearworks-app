@@ -1,4 +1,4 @@
-import type { PartRegistryType } from "./types"
+import type { PartRegistryType } from '@/types/model-types'
 
 export const partRegistry: PartRegistryType = {
   Placeholder: [

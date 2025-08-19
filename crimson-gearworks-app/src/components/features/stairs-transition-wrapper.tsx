@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { usePathname } from 'next/navigation';
-import { AnimatePresence } from 'framer-motion';
-import StairsTransitionLayout from '@/components/features/stairs-transition-layout';
-import { ReactNode } from 'react';
+import { usePathname } from "next/navigation";
+import { AnimatePresence } from "framer-motion";
+import StairsTransitionLayout from "@/components/features/stairs-transition-layout";
+import { ReactNode } from "react";
 
 export default function StairsTransitionWrapper({ children }: { children: ReactNode }) {
   const pathname = usePathname();

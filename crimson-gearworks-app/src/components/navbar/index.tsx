@@ -10,7 +10,6 @@ import { FaSteam } from "react-icons/fa6";
 function useMediaQuery(query: string) {
   const [matches, setMatches] = useState(false);
   useEffect(() => {
-    // Why: SSR-safe matchMedia usage
     const mql = typeof window !== "undefined" ? window.matchMedia(query) : null;
     const onChange = (e: MediaQueryListEvent | MediaQueryList) => setMatches((e as MediaQueryList).matches ?? (e as MediaQueryListEvent).matches);
     if (mql) {
@@ -28,11 +27,10 @@ export default function Navbar() {
   const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const closeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const isDesktop = useMediaQuery("(min-width: 1024px)"); // lg
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
-  // Desktop hover handlers
   const handleMouseEnter = () => {
     if (!isDesktop) return;
     if (closeTimeout.current) clearTimeout(closeTimeout.current);
@@ -43,7 +41,6 @@ export default function Navbar() {
     closeTimeout.current = setTimeout(() => setIsSubMenuOpen(false), 120);
   };
 
-  // Close menus on route change & ESC
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setIsSubMenuOpen(false);
@@ -73,7 +70,6 @@ export default function Navbar() {
         </Link>
       </div>
 
-      {/* Mobile menu toggle */}
       <button
         className={styles.menuToggle}
         aria-controls="primary-navigation"
@@ -84,7 +80,6 @@ export default function Navbar() {
         <span className={styles.burger} data-open={isMobileMenuOpen || undefined} />
       </button>
 
-      {/* Nav: desktop bar + mobile drawer */}
       <nav
         id="primary-navigation"
         className={styles.navbar}
@@ -115,7 +110,6 @@ export default function Navbar() {
             </Link>
           </li>
 
-          {/* Community with hover (desktop) + click (mobile) */}
           <li
             className={`${styles.listItem} ${styles.subMenuWrapper}`}
             onMouseEnter={handleMouseEnter}
@@ -127,14 +121,12 @@ export default function Navbar() {
               aria-expanded={isSubMenuOpen}
               aria-controls="community-submenu"
               onClick={() => {
-                // Why: enable tap/click toggle on touch & small screens
                 if (!isDesktop) setIsSubMenuOpen((v) => !v);
               }}
             >
               Community
             </button>
 
-            {/* Desktop flyout */}
             {isDesktop && isSubMenuOpen && (
               <div className={styles.subNavbarDesktop}>
                 <ul className={styles.subNavLinks} role="list">
@@ -182,7 +174,6 @@ export default function Navbar() {
               </div>
             )}
 
-            {/* Mobile inline submenu */}
             {!isDesktop && (
               <ul
                 id="community-submenu"
@@ -261,7 +252,6 @@ export default function Navbar() {
             </Link>
           </li>
 
-          {/* CTA in mobile drawer */}
           <li className={styles.ctaMobile}>
             <a
               href="https://store.steampowered.com"
@@ -279,7 +269,6 @@ export default function Navbar() {
         </ul>
       </nav>
 
-      {/* Desktop CTA */}
       <div className={styles.ctaButton}>
         <a
           href="https://store.steampowered.com"

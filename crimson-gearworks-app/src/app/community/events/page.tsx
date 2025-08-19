@@ -1,35 +1,60 @@
-'use client'
+"use client"
 
-import { useEffect, useRef } from 'react'
-import Lenis from 'lenis'
-import * as THREE from 'three'
-import styles from '@/styles/events/index.module.css'
+import { useEffect, useRef } from "react"
+import Lenis from "lenis"
+import * as THREE from "three"
+import styles from "@/styles/events/index.module.css"
 
 export default function EventsPage() {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null)
 
   useEffect(() => {
+    if (!containerRef.current) return
+
+    const w = window.innerWidth
+    const h = window.innerHeight
+
+    const isSm = w < 640
+    const isMd = w >= 640 && w < 1024
+
+    const params = {
+      cameraFov: isSm ? 78 : isMd ? 72 : 70,
+      radius: isSm ? 5.5 : isMd ? 6.25 : 7,
+      cylinderHeight: isSm ? 36 : isMd ? 42 : 45,
+      segments: 30,
+      numVerticalSections: isSm ? 7 : isMd ? 10 : 12,
+      blocksPerSection: isSm ? 4 : isMd ? 5 : 6,
+      verticalSpacing: isSm ? 4.25 : isMd ? 4.75 : 5,
+      tileW: isSm ? 3.25 : isMd ? 4 : 4.75,
+      tileH: isSm ? 2.1 : isMd ? 2.4 : 2.75,
+      baseRotationSpeed: isSm ? 0.0012 : 0.0015,
+      dprCap: isSm ? 1.5 : 2,
+    }
+
     const scene = new THREE.Scene()
-    const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000)
+    const camera = new THREE.PerspectiveCamera(
+      params.cameraFov,
+      w / h,
+      0.1,
+      1000
+    )
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
     rendererRef.current = renderer
 
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    renderer.setSize(window.innerWidth, window.innerHeight)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, params.dprCap))
+    renderer.setSize(w, h)
     renderer.setClearColor(0x000000, 0)
 
-    renderer.domElement.style.position = 'fixed'
-    renderer.domElement.style.top = '0'
-    renderer.domElement.style.left = '0'
-    renderer.domElement.style.width = '100%'
-    renderer.domElement.style.height = '100%'
-    renderer.domElement.style.zIndex = '-1'
-    renderer.domElement.style.pointerEvents = 'none'
+    renderer.domElement.style.position = "fixed"
+    renderer.domElement.style.top = "0"
+    renderer.domElement.style.left = "0"
+    renderer.domElement.style.width = "100%"
+    renderer.domElement.style.height = "100%"
+    renderer.domElement.style.zIndex = "-1"
+    renderer.domElement.style.pointerEvents = "none"
 
-    if (containerRef.current) {
-      containerRef.current.appendChild(renderer.domElement)
-    }
+    containerRef.current.appendChild(renderer.domElement)
 
     camera.position.z = 12
 
@@ -39,11 +64,9 @@ export default function EventsPage() {
     const galleryGroup = new THREE.Group()
     scene.add(galleryGroup)
 
-    const radius = 7
-    const height = 45
-    const segments = 30
+    const { radius, cylinderHeight: cylH, segments } = params
 
-    const cylinderGeometry = new THREE.CylinderGeometry(radius, radius, height, segments, 1, true)
+    const cylinderGeometry = new THREE.CylinderGeometry(radius, radius, cylH, segments, 1, true)
     const cylinderMaterial = new THREE.MeshPhongMaterial({
       color: 0xffffff,
       transparent: true,
@@ -55,6 +78,7 @@ export default function EventsPage() {
 
     const textureLoader = new THREE.TextureLoader()
     const blocks: THREE.Group[] = []
+    const loadedTextures: THREE.Texture[] = []
 
     function getRandomImage() {
       return Math.floor(Math.random() * 50) + 1
@@ -67,27 +91,28 @@ export default function EventsPage() {
           loadedTexture.minFilter = THREE.LinearMipmapLinearFilter
           loadedTexture.magFilter = THREE.LinearFilter
           loadedTexture.anisotropy = renderer.capabilities.getMaxAnisotropy()
+          loadedTextures.push(loadedTexture)
           resolve(loadedTexture)
         })
       })
     }
 
-    function createCurvedPlane(width: number, height: number, radius: number, segments: number) {
+    function createCurvedPlane(width: number, height: number, r: number, seg: number) {
       const geometry = new THREE.BufferGeometry()
       const vertices: number[] = []
       const indices: number[] = []
       const uvs: number[] = []
 
-      const segmentsX = segments * 4
-      const segmentsY = Math.floor(height * 12)
-      const theta = width / radius
+      const segmentsX = seg * 4
+      const segmentsY = Math.max(1, Math.floor(height * 12))
+      const theta = width / r
 
       for (let y = 0; y <= segmentsY; y++) {
         const yPos = (y / segmentsY - 0.5) * height
         for (let x = 0; x <= segmentsX; x++) {
           const xAngle = (x / segmentsX - 0.5) * theta
-          const xPos = Math.sin(xAngle) * radius
-          const zPos = Math.cos(xAngle) * radius
+          const xPos = Math.sin(xAngle) * r
+          const zPos = Math.cos(xAngle) * r
           vertices.push(xPos, yPos, zPos)
           uvs.push((x / segmentsX) * 0.8 + 0.1, y / segmentsY)
         }
@@ -103,25 +128,25 @@ export default function EventsPage() {
         }
       }
 
-      geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3))
-      geometry.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2))
+      geometry.setAttribute("position", new THREE.Float32BufferAttribute(vertices, 3))
+      geometry.setAttribute("uv", new THREE.Float32BufferAttribute(uvs, 2))
       geometry.setIndex(indices)
       geometry.computeVertexNormals()
 
       return geometry
     }
 
-    const numVeritcalSections = 12
-    const blocksPerSection = 6
-    const verticalSpacing = 5
+    const numVeritcalSections = params.numVerticalSections
+    const blocksPerSection = params.blocksPerSection
+    const verticalSpacing = params.verticalSpacing
     const totalBlockHeight = numVeritcalSections * verticalSpacing
-    const heightBuffer = (height - totalBlockHeight) / 2
-    const startY = -height / 2 + heightBuffer + verticalSpacing
+    const heightBuffer = (cylH - totalBlockHeight) / 2
+    const startY = -cylH / 2 + heightBuffer + verticalSpacing
     const sectionAngle = (Math.PI * 2) / blocksPerSection
     const maxRandomAngle = sectionAngle * 0.2
 
     async function createBlock(baseY: number, yOffset: number, _sectionIndex: number, blockIndex: number) {
-      const blockGeometry = createCurvedPlane(4.75, 2.75, radius, 20)
+      const blockGeometry = createCurvedPlane(params.tileW, params.tileH, radius, 20)
       const imageNumber = getRandomImage()
       const texture = await loadImageTexture(imageNumber)
 
@@ -161,12 +186,12 @@ export default function EventsPage() {
     const lenis = new Lenis({ autoRaf: true })
     let currentScroll = 0
     let rotationSpeed = 0
-    const baseRotationSpeed = 0.0015
+    const baseRotationSpeed = params.baseRotationSpeed
     const maxRotationSpeed = 0.05
 
     let totalScroll = document.documentElement.scrollHeight - window.innerHeight
 
-    lenis.on('scroll', (e: any) => {
+    lenis.on("scroll", (e: any) => {
       currentScroll = window.pageYOffset
       rotationSpeed = Math.max(Math.min(e.velocity * 0.005, maxRotationSpeed), -maxRotationSpeed)
     })
@@ -175,7 +200,7 @@ export default function EventsPage() {
     const animate = () => {
       rafId = requestAnimationFrame(animate)
       const scrollFraction = totalScroll > 0 ? currentScroll / totalScroll : 0
-      camera.position.y = -(scrollFraction * height - height / 2)
+      camera.position.y = -(scrollFraction * cylH - cylH / 2)
       galleryGroup.rotation.y += baseRotationSpeed + rotationSpeed
       rotationSpeed *= 0.9
       renderer.render(scene, camera)
@@ -190,26 +215,26 @@ export default function EventsPage() {
       camera.aspect = width / heightV
       camera.updateProjectionMatrix()
       renderer.setSize(width, heightV)
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, params.dprCap))
       totalScroll = document.documentElement.scrollHeight - window.innerHeight
     }
 
-    window.addEventListener('resize', handleResize)
+    window.addEventListener("resize", handleResize, { passive: true })
 
     return () => {
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener("resize", handleResize)
       cancelAnimationFrame(rafId)
       renderer.dispose()
       scene.traverse((obj) => {
-        if ((obj as THREE.Mesh).geometry) {
-          ; (obj as THREE.Mesh).geometry.dispose()
-        }
-        if ((obj as THREE.Mesh).material) {
-          const m = (obj as THREE.Mesh).material as THREE.Material | THREE.Material[]
+        const mesh = obj as THREE.Mesh
+        if (mesh.geometry) mesh.geometry.dispose()
+        if (mesh.material) {
+          const m = mesh.material as THREE.Material | THREE.Material[]
           if (Array.isArray(m)) m.forEach((mm) => mm.dispose())
           else m.dispose()
         }
       })
+      loadedTextures.forEach((t) => t.dispose())
       if (renderer.domElement && renderer.domElement.parentNode) {
         renderer.domElement.parentNode.removeChild(renderer.domElement)
       }

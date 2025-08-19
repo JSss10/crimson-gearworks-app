@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import styles from "@/styles/parts-shop/parts-shop.module.css";
+import styles from "@/styles/parts-shop/index.module.css";
 import type { Part } from "@/types/shop-categories";
 
 interface Props { part: Part; featured?: boolean; wide?: boolean; imageOnly?: boolean; }
@@ -14,9 +14,22 @@ export default function PartCard({ part, featured, wide, imageOnly }: Props) {
     imageOnly ? styles.imageOnly : "",
   ].join(" ");
 
+  const imgSizes = featured
+    ? "(max-width: 640px) 100vw, (max-width: 1024px) 100vw, (max-width: 1280px) 66vw, 50vw"
+    : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw";
+
   const content = imageOnly ? (
     <div className={styles.fullImgWrap}>
-      <Image src={part.image || ""} alt="" fill className={styles.fullImg} />
+      <Image
+        src={part.image || ""}
+        alt=""
+        fill
+        sizes={imgSizes}
+        priority={false}
+        loading="lazy"
+        decoding="async"
+        className={styles.fullImg}
+      />
     </div>
   ) : (
     <>
@@ -34,7 +47,16 @@ export default function PartCard({ part, featured, wide, imageOnly }: Props) {
       <div className={styles.cardImgWrap}>
         {featured && <span className={styles.imgFrame} aria-hidden />}
         {part.image ? (
-          <Image src={part.image} alt={`${part.name} image`} fill className={styles.cardImg} />
+          <Image
+            src={part.image}
+            alt={`${part.name} image`}
+            fill
+            sizes={imgSizes}
+            priority={!!featured}
+            loading={featured ? "eager" : "lazy"}
+            decoding="async"
+            className={styles.cardImg}
+          />
         ) : (
           <div className={styles.placeholder} aria-hidden>
             <span className={styles.placeholderText}>{part.name.split(" ")[0]}</span>

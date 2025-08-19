@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import styles from "@/styles/parts-shop/parts-shop.module.css";
+import styles from "@/styles/parts-shop/index.module.css";
 import PartCard from "@/components/parts-shop/part-card";
 import { parts } from "@/data/parts";
 import type { Category } from "@/types/shop-categories";

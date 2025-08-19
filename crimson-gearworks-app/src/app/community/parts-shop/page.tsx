@@ -1,4 +1,4 @@
-import PartsShop from "@/components/parts-shop";
+import PartsShop from "@/components/parts-shop/parts-shop";
 
 export const metadata = {
   title: "Crimson Gearworks – Parts-Shop",

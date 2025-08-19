@@ -1,0 +1,32 @@
+.container {
+  position: relative;
+  margin: clamp(8vh, 12vh, 15vh) 0;
+}
+
+.stickyMask {
+  display: flex;
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+  height: var(--sticky-h, 60vh);
+  align-items: center;
+  justify-content: center;
+  mask-image: url("/medias/mask.svg");
+  -webkit-mask-image: url("/medias/mask.svg");
+  mask-position: 52.35% center;
+  mask-repeat: no-repeat;
+  mask-size: 80%;
+}
+
+.stickyMask video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* -------- Viewport breakpoints -------- */
+@media (max-width: 767px) {
+  .stickyMask {
+    mask-position: center;
+  }
+}

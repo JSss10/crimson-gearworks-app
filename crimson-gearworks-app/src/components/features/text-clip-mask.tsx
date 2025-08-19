@@ -1,18 +1,17 @@
-'use client';
+"use client";
 
-import { useRef, useEffect } from 'react';
-import styles from '@/styles/features/mask.module.css';
+import { useRef, useEffect } from "react";
+import styles from "@/styles/features/text-clip-mask.module.css";
 
 export default function TextClipMask() {
   const container = useRef<HTMLDivElement | null>(null);
   const stickyMask = useRef<HTMLDivElement | null>(null);
 
-  // Tunables: sichtbare Höhe und Scroll-Distanz (in vh)
-  const STICKY_VH = 60; // reduziert die sichtbare Höhe (zuvor 100)
-  const SCROLL_VH = 60; // wie viel gescrollt werden muss, um die Maske voll zu vergrößern
+  const STICKY_VH = 60;
+  const SCROLL_VH = 60;
 
-  const initialMaskSize = 0.8; // 80%
-  const targetMaskSize = 30;   // +3000%
+  const initialMaskSize = 0.8;
+  const targetMaskSize = 30;
   const easing = 0.15;
 
   const easedProgressRef = useRef(0);
@@ -20,13 +19,13 @@ export default function TextClipMask() {
   const scrollDistPxRef = useRef(0);
 
   useEffect(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     const recalc = () => {
       if (!container.current) return;
       const rect = container.current.getBoundingClientRect();
       const pageTop = window.scrollY + rect.top;
-      // Start der Animation: sobald der Container die Viewport-Oberkante erreicht
       startYRef.current = pageTop;
-      // Dauer der Animation rein virtuell über SCROLL_VH, unabhängig von Containerhöhe
       scrollDistPxRef.current = (SCROLL_VH / 100) * window.innerHeight;
     };
 
@@ -37,26 +36,29 @@ export default function TextClipMask() {
       const start = startYRef.current;
       const dist = scrollDistPxRef.current || 1;
       const raw = clamp01((window.scrollY - start) / dist);
-
-      // sanftes Nachziehen
       easedProgressRef.current += (raw - easedProgressRef.current) * easing;
-
-      const size = (initialMaskSize + targetMaskSize * easedProgressRef.current) * 100 + '%';
-
+      const size = (initialMaskSize + targetMaskSize * easedProgressRef.current) * 100 + "%";
       if (stickyMask.current) {
         (stickyMask.current.style as any).webkitMaskSize = size;
         (stickyMask.current.style as any).maskSize = size;
       }
-
       rafId = requestAnimationFrame(animate);
     };
 
     recalc();
-    window.addEventListener('resize', recalc, { passive: true });
-    rafId = requestAnimationFrame(animate);
+    window.addEventListener("resize", recalc, { passive: true });
 
+    if (prefersReduced) {
+      if (stickyMask.current) {
+        (stickyMask.current.style as any).webkitMaskSize = "100%";
+        (stickyMask.current.style as any).maskSize = "100%";
+      }
+      return () => window.removeEventListener("resize", recalc);
+    }
+
+    rafId = requestAnimationFrame(animate);
     return () => {
-      window.removeEventListener('resize', recalc);
+      window.removeEventListener("resize", recalc);
       cancelAnimationFrame(rafId);
     };
   }, []);
@@ -66,12 +68,7 @@ export default function TextClipMask() {
       <div
         ref={container}
         className={styles.container}
-        style={
-          {
-            ['--sticky-h' as any]: `${STICKY_VH}vh`,
-            ['--scroll-dist' as any]: `${SCROLL_VH}vh`,
-          } as React.CSSProperties
-        }
+        style={{ ["--sticky-h" as any]: `${STICKY_VH}vh`, ["--scroll-dist" as any]: `${SCROLL_VH}vh` } as React.CSSProperties}
       >
         <div ref={stickyMask} className={styles.stickyMask}>
           <video autoPlay muted loop playsInline>

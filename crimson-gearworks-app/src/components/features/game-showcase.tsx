@@ -1,7 +1,7 @@
-'use client';
-import { useState, KeyboardEvent } from 'react';
-import { motion, type Variants, cubicBezier } from 'framer-motion';
-import styles from '@/styles/features/game-showcase.module.css';
+"use client";
+import { useState, KeyboardEvent } from "react";
+import { motion, type Variants, cubicBezier } from "framer-motion";
+import styles from "@/styles/features/game-showcase.module.css";
 
 export type GameShowcaseItem = {
   title1: string;
@@ -14,7 +14,7 @@ const easeBezier = cubicBezier(0.23, 1, 0.32, 1);
 
 const anim: Variants = {
   initial: { width: 0 },
-  open: { width: 'auto', transition: { duration: 0.4, ease: easeBezier } },
+  open: { width: "auto", transition: { duration: 0.4, ease: easeBezier } },
   closed: { width: 0 },
 };
 
@@ -23,7 +23,7 @@ export default function GameShowcase({ item }: { item: GameShowcaseItem }) {
   const { title1, title2, src, alt } = item;
 
   const onKey = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Enter' || e.key === ' ') {
+    if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       setIsActive((v) => !v);
     }
@@ -34,6 +34,7 @@ export default function GameShowcase({ item }: { item: GameShowcaseItem }) {
       className={styles.item}
       onMouseEnter={() => setIsActive(true)}
       onMouseLeave={() => setIsActive(false)}
+      onClick={() => setIsActive((v) => !v)}
       tabIndex={0}
       role="button"
       aria-pressed={isActive}
@@ -43,7 +44,7 @@ export default function GameShowcase({ item }: { item: GameShowcaseItem }) {
       <motion.div
         variants={anim}
         initial="initial"
-        animate={isActive ? 'open' : 'closed'}
+        animate={isActive ? "open" : "closed"}
         className={styles.imgContainer}
       >
         <img

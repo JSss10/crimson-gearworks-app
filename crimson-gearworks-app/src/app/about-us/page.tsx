@@ -1,8 +1,8 @@
-import React from 'react';
-import Image from 'next/image';
-import styles from '@/styles/about-us/index.module.css';
-import Team from '@/components/features/team-reveal';
-import PolaroidScene from '@/components/features/polaroid-scene';
+import React from "react";
+import Image from "next/image";
+import styles from "@/styles/about-us/index.module.css";
+import Team from "@/components/features/team-reveal";
+import PolaroidScene from "@/components/features/polaroid-scene";
 
 export default function AboutUsPage() {
   return (
@@ -11,12 +11,13 @@ export default function AboutUsPage() {
         <div className={styles.mediaWrap} aria-hidden="true">
           <div className={styles.mediaInner}>
             <Image
-              src="/images/events/img1.jpg"
+              src="/images/about-us/team.png"
               alt=""
               fill
               priority
               sizes="100vw"
-              className={styles.media} />
+              className={styles.media}
+            />
           </div>
           <div className={styles.overlay} />
         </div>
@@ -34,7 +35,7 @@ export default function AboutUsPage() {
         </div>
       </section>
       <Team />
-      <PolaroidScene title="Our spirit" imagesCount={12} imagePathTemplate="/images/events/img{n}.jpg" />
+      <PolaroidScene title="Our spirit" imagesCount={12} imagePathTemplate="/images/about-us/insight{n}.png" />
     </>
   );
 }

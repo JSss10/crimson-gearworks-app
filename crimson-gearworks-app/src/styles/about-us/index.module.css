@@ -1,7 +1,12 @@
+:root {
+  --space-outer: clamp(1rem, 2.5vw, 3rem);
+}
+
 .container {
   position: relative;
-  height: 100vh;
   width: 100%;
+  min-height: 100dvh;
+  height: 100svh;
   overflow: hidden;
 }
 
@@ -9,13 +14,11 @@
   position: absolute;
   inset: 0;
 }
-
 .mediaInner {
   position: relative;
   width: 100%;
   height: 100%;
 }
-
 .media {
   object-fit: cover;
 }
@@ -23,7 +26,12 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.55) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0.45) 60%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
   pointer-events: none;
 }
 
@@ -37,36 +45,78 @@
 .heroInner {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 3rem;
+  padding: var(--space-outer);
 }
 
 .titleLine {
-  font-size: 5rem;
+  font-size: clamp(2.25rem, 6vw + 0.25rem, 5.5rem);
   font-weight: 700;
   letter-spacing: 0.02em;
   line-height: 0.9;
   display: flex;
-  gap: 2rem;
+  gap: clamp(0.5rem, 2.5vw, 2rem);
   align-items: baseline;
   text-transform: uppercase;
 }
 
 .titleLineTwo {
   position: relative;
-  font-size: 3rem;
+  font-size: clamp(1.25rem, 3.5vw + 0.25rem, 3rem);
   font-weight: 600;
   letter-spacing: 0.08em;
-  margin-top: 1rem;
+  margin-top: 0.75rem;
   display: inline-flex;
   align-items: center;
   text-transform: uppercase;
-  gap: 2rem;
+  gap: clamp(0.5rem, 2vw, 2rem);
 }
 
 .orange {
   color: var(--color-primary);
 }
-
 .white {
   color: #fff;
+}
+
+@media (max-width: 1280px) {
+  .hero {
+    top: 12vh;
+    transform: translateX(-5%);
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    top: 10vh;
+    transform: none;
+  }
+  .heroInner {
+    padding: clamp(1rem, 3vw, 2rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    min-height: 100dvh;
+    height: auto;
+  }
+  .hero {
+    position: relative;
+    top: 15vh;
+    text-align: center;
+  }
+  .titleLine {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .titleLineTwo {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroInner {
+    padding-left: calc(env(safe-area-inset-left) + 1rem);
+    padding-right: calc(env(safe-area-inset-right) + 1rem);
+  }
 }

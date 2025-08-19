@@ -1,19 +1,19 @@
-import React from 'react';
-import Image from 'next/image';
-import styles from '@/styles/game-info/index.module.css';
-import Character from '@/components/features/character-text-scroll';
-import TextClipMask from '@/components/features/text-clip-mask';
-import HoverGallery from '@/components/features/hover-gallery';
-import type { GameShowcaseItem } from '@/components/features/game-showcase';
+import React from "react";
+import Image from "next/image";
+import styles from "@/styles/game-info/index.module.css";
+import Character from "@/components/features/character-text-scroll";
+import TextClipMask from "@/components/features/text-clip-mask";
+import HoverGallery from "@/components/features/hover-gallery";
+import type { GameShowcaseItem } from "@/components/features/game-showcase";
 
-const paragraph = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+const paragraph = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
 
 const items: GameShowcaseItem[] = [
-  { title1: 'Lorem ipsum', title2: 'Lorem', src: 'img1.jpg' },
-  { title1: 'Lorem ipsum', title2: 'Lorem', src: 'img1.jpg' },
-  { title1: 'Lorem ipsum', title2: 'Lorem', src: 'img1.jpg' },
-  { title1: 'Lorem ipsum', title2: 'Lorem', src: 'img1.jpg' },
-  { title1: 'Lorem ipsum', title2: 'Lorem', src: 'img1.jpg' },
+  { title1: "Lorem ipsum", title2: "Lorem", src: "img1.jpg" },
+  { title1: "Lorem ipsum", title2: "Lorem", src: "img1.jpg" },
+  { title1: "Lorem ipsum", title2: "Lorem", src: "img1.jpg" },
+  { title1: "Lorem ipsum", title2: "Lorem", src: "img1.jpg" },
+  { title1: "Lorem ipsum", title2: "Lorem", src: "img1.jpg" },
 ];
 
 export default function GameInfoPage() {
@@ -27,8 +27,9 @@ export default function GameInfoPage() {
               alt=""
               fill
               priority
-              sizes="100vw"
-              className={styles.media} />
+              sizes="(max-width: 768px) 100vw, 100vw"
+              className={styles.media}
+            />
           </div>
           <div className={styles.overlay} />
         </div>

@@ -1,26 +1,37 @@
-.competitor{
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    padding: 50px 100px 50px 100px;
-    cursor: pointer;
-    transition: all 0.2s;
-    background-color: var(--bg-color-primary);
-    border-radius: 10px;
-    margin-top: 25px;
+.competitor {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+  background-color: var(--bg-color-primary);
+  border-radius: 12px;
+  margin-top: 16px;
 }
 
 .competitor:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .competitor:nth-child(even) {
   background-color: var(--bg-color-secondary);
 }
 
-.competitor:hover{
+@media (hover: hover) and (pointer: fine) {
+  .competitor:hover {
     opacity: 0.5;
+  }
+  .competitor:hover .info h2 {
+    transform: translateX(-10px);
+  }
+  .competitor:hover .rank {
+    transform: translateX(10px);
+  }
 }
 
 .info {
@@ -31,28 +42,42 @@
 
 .rank {
   font-family: var(--font-orbitron), sans-serif;
-  font-size: 70px;
+  font-size: clamp(2rem, 8vw, 4.375rem);
   font-weight: 800;
   color: transparent;
-  -webkit-text-stroke: 1px var(--color-primary); 
+  -webkit-text-stroke: 1px var(--color-primary);
 }
 
-.competitor:hover .info h2{
-    transform: translateX(-10px);
+.competitor h2 {
+  font-size: clamp(1.25rem, 5vw, 2.5rem);
+  margin: 0;
+  font-weight: 800;
+  transition: transform 0.4s;
 }
 
-.competitor:hover .rank{
-    transform: translateX(10px);
+.competitor p {
+  transition: color 0.4s;
+  font-weight: 300;
+  margin: 0;
 }
 
-.competitor h2{
-    font-size: 40px;
-    margin: 0px;
-    font-weight: 800;
-    transition: all 0.4s;
+@media (min-width: 640px) {
+  .competitor {
+    padding: 20px 28px;
+    margin-top: 18px;
+  }
 }
 
-.competitor p{
-    transition: all 0.4s;
-    font-weight: 300;
+@media (min-width: 768px) {
+  .competitor {
+    padding: 28px 44px;
+    margin-top: 22px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .competitor {
+    padding: 50px 100px;
+    margin-top: 25px;
+  }
 }

@@ -5,10 +5,10 @@ import type { Engine as EngineType, Bodies as BodiesType, Body as BodyType } fro
 import { Engine, Composite, Bodies, Body } from "matter-js";
 import styles from "@/styles/features/polaroid-scene.module.css";
 
-const POLAROID_W = 200;
-const POLAROID_H = 225;
-const BODY_W = 100;
-const BODY_H = 200;
+const BASE_POLAROID_W = 200;
+const BASE_POLAROID_H = 225;
+const BASE_BODY_W = 100;
+const BASE_BODY_H = 200;
 const BOUNDARY_THICKNESS = 50;
 
 function rand(min: number, max: number) {
@@ -17,6 +17,14 @@ function rand(min: number, max: number) {
 
 function hypot(a: number, b: number) {
   return Math.sqrt(a * a + b * b);
+}
+
+function scaleFromWidth(w: number) {
+  if (w < 390) return 0.55;
+  if (w < 600) return 0.65;
+  if (w < 768) return 0.75;
+  if (w < 1024) return 0.9;
+  return 1;
 }
 
 export type PolaroidSceneProps = {
@@ -29,12 +37,12 @@ export type PolaroidSceneProps = {
 export default function PolaroidScene({
   title = "Polaroid",
   imagesCount = 12,
-  imagePathTemplate = "/images/events/img{n}.jpg",
+  imagePathTemplate = "/images/about-us/insight{n}.png",
   imageSrcs,
 }: PolaroidSceneProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const engineRef = useRef<EngineType | null>(null);
-  const itemsRef = useRef<Array<{ body: BodyType; el: HTMLDivElement }>>([]);
+  const itemsRef = useRef<Array<{ body: BodyType; el: HTMLDivElement; w: number; h: number }>>([]);
   const boundariesRef = useRef<BodyType[]>([]);
   const rafRef = useRef<number | null>(null);
   const lastMouseRef = useRef<{ x: number; y: number }>({ x: -1, y: -1 });
@@ -48,6 +56,11 @@ export default function PolaroidScene({
     const engine = Engine.create();
     engine.gravity.y = 0;
     engineRef.current = engine;
+
+    const getSize = () => {
+      const rect = container.getBoundingClientRect();
+      return { w: rect.width, h: rect.height };
+    };
 
     const addBoundaries = (w: number, h: number) => {
       const halfT = BOUNDARY_THICKNESS / 2;
@@ -69,20 +82,23 @@ export default function PolaroidScene({
       boundariesRef.current = [];
     };
 
-    const getSize = () => {
-      const rect = container.getBoundingClientRect();
-      return { w: rect.width, h: rect.height };
-    };
-
     const { w, h } = getSize();
+    const scale = scaleFromWidth(w);
+
+    const PW = Math.round(BASE_POLAROID_W * scale);
+    const PH = Math.round(BASE_POLAROID_H * scale);
+    const BW = Math.round(BASE_BODY_W * scale);
+    const BH = Math.round(BASE_BODY_H * scale);
+
     addBoundaries(w, h);
 
-    const MARGIN = 100;
+    const MARGIN = Math.max(60, Math.round(100 * scale));
+
     for (let i = 0; i < srcs.length; i++) {
       const x = rand(MARGIN, w - MARGIN);
       const y = rand(MARGIN, h - MARGIN);
 
-      const body = Bodies.rectangle(x, y, BODY_W, BODY_H, {
+      const body = Bodies.rectangle(x, y, BW, BH, {
         frictionAir: 0.075,
         restitution: 0.25,
         density: 0.002,
@@ -92,7 +108,9 @@ export default function PolaroidScene({
 
       const el = document.createElement("div");
       el.className = styles.item;
-      el.style.transform = `translate3d(${x - POLAROID_W / 2}px, ${y - POLAROID_H / 2}px, 0) rotate(${body.angle}rad)`;
+      el.style.width = `${PW}px`;
+      el.style.height = `${PH}px`;
+      el.style.transform = `translate3d(${x - PW / 2}px, ${y - PH / 2}px, 0) rotate(${body.angle}rad)`;
 
       const img = document.createElement("img");
       img.src = srcs[i];
@@ -100,14 +118,14 @@ export default function PolaroidScene({
       el.appendChild(img);
 
       container.appendChild(el);
-      itemsRef.current.push({ body, el });
+      itemsRef.current.push({ body, el, w: PW, h: PH });
     }
 
     const tick = () => {
       Engine.update(engine, 1000 / 60);
-      for (const { body, el } of itemsRef.current) {
+      for (const { body, el, w, h } of itemsRef.current) {
         const { x, y } = body.position;
-        el.style.transform = `translate3d(${x - POLAROID_W / 2}px, ${y - POLAROID_H / 2}px, 0) rotate(${body.angle}rad)`;
+        el.style.transform = `translate3d(${x - w / 2}px, ${y - h / 2}px, 0) rotate(${body.angle}rad)`;
       }
       rafRef.current = requestAnimationFrame(tick);
     };
@@ -121,11 +139,12 @@ export default function PolaroidScene({
       if (hypot(x - last.x, y - last.y) <= 10) return;
       lastMouseRef.current = { x, y };
 
+      const influence = 150 * scale;
       for (const { body } of itemsRef.current) {
         const dx = x - body.position.x;
         const dy = y - body.position.y;
-        if (hypot(dx, dy) < 150) {
-          const forceMagnitude = 3;
+        if (hypot(dx, dy) < influence) {
+          const forceMagnitude = 3 * scale;
           Body.applyForce(
             body,
             { x: body.position.x, y: body.position.y },

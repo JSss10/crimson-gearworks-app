@@ -1,33 +1,17 @@
-'use client';
+"use client";
 
 import { useScroll, useTransform, motion, MotionValue } from "framer-motion";
 import React, { useRef } from "react";
 import styles from "@/styles/features/text-scroll.module.css";
 
-interface ParagraphProps {
-  paragraph: string;
-}
-
-interface WordProps {
-  children: string;
-  progress: MotionValue<number>;
-  range: [number, number];
-}
-
-interface CharProps {
-  children: string;
-  progress: MotionValue<number>;
-  range: [number, number];
-}
+interface ParagraphProps { paragraph: string; }
+interface WordProps { children: string; progress: MotionValue<number>; range: [number, number]; }
+interface CharProps { children: string; progress: MotionValue<number>; range: [number, number]; }
 
 export default function CharacterTextScroll({ paragraph }: ParagraphProps) {
   const container = useRef<HTMLParagraphElement | null>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: container,
-    offset: ["start 0.9", "start 0.25"],
-  });
-
+  const { scrollYProgress } = useScroll({ target: container, offset: ["start 0.9", "start 0.25"] });
   const words = paragraph.split(" ");
 
   return (
@@ -66,7 +50,6 @@ const Word: React.FC<WordProps> = ({ children, progress, range }) => {
 
 const Char: React.FC<CharProps> = ({ children, progress, range }) => {
   const opacity = useTransform(progress, range, [0, 1]);
-
   return (
     <span>
       <span className={styles.shadow}>{children}</span>

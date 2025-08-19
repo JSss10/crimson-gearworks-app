@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { expand, opacity } from '@/lib/anim';
-import styles from '@/styles/features/stairs-transition.module.css';
-import { ReactNode } from 'react';
+import { motion } from "framer-motion";
+import { expand, opacity } from "@/lib/anim";
+import styles from "@/styles/features/stairs-transition.module.css";
+import { ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
@@ -12,9 +12,9 @@ type Props = {
 
 export default function StairsTransitionLayout({ children, backgroundColor }: Props) {
   const anim = (variants: any, custom: number | null = null) => ({
-    initial: 'initial',
-    animate: 'enter',
-    exit: 'exit',
+    initial: "initial",
+    animate: "enter",
+    exit: "exit",
     custom,
     variants,
   });

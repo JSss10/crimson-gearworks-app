@@ -11,6 +11,7 @@ export const publicRoutes = [
   "/community/leaderboard",
   "/community/game-updates",
   "/community/parts-shop",
+  "/community/parts-shop/spark-chest",
   "/about-us",
   "/contact",
 ]
@@ -21,6 +22,7 @@ export const publicRoutes = [
  * @type {string[]}
  */
 export const authRoutes = [
+  "/",
 ]
 
 /**

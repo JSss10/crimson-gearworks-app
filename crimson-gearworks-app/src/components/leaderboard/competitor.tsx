@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React from 'react';
-import styles from '@/styles/leaderboard/competitor.module.css';
+import React, { useEffect, useState } from "react";
+import styles from "@/styles/leaderboard/competitor.module.css";
 
 interface ModalType {
   active: boolean;
@@ -16,10 +16,16 @@ interface CompetitorProps {
 }
 
 export default function Competitor({ index, title, location, setModal }: CompetitorProps) {
+  const [canHover, setCanHover] = useState(false);
+
+  useEffect(() => {
+    setCanHover(window.matchMedia("(hover: hover) and (pointer: fine)").matches);
+  }, []);
+
   return (
     <div
-      onMouseEnter={() => setModal({ active: true, index })}
-      onMouseLeave={() => setModal({ active: false, index })}
+      onMouseEnter={() => canHover && setModal({ active: true, index })}
+      onMouseLeave={() => canHover && setModal({ active: false, index })}
       className={styles.competitor}
     >
       <div className={styles.info}>

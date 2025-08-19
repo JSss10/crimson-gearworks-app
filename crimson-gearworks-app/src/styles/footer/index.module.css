@@ -1,12 +1,26 @@
 .container {
   position: relative;
-  height: 800px;
+  height: clamp(700px, 100vh, 800px);
   clip-path: polygon(0% 0, 100% 0%, 100% 100%, 0 100%);
 }
 
 .fixedContent {
   position: fixed;
   bottom: 0;
-  height: 800px;
+  left: 0;
+  right: 0;
   width: 100%;
+  height: clamp(700px, 100vh, 800px);
+  z-index: 10;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@media (max-width: 1024px) {
+  .container {
+    height: auto;
+  }
+  .fixedContent {
+    position: static;
+    height: auto;
+  }
 }

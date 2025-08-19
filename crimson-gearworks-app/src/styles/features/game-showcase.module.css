@@ -1,33 +1,26 @@
 .item {
-  border-top: 2px solid white;
-  padding-top: 0.8vw;
-  padding-bottom: 0.8vw;
+  border-top: 1px solid white;
+  padding-top: clamp(8px, 1.5vw, 24px);
+  padding-bottom: clamp(8px, 1.5vw, 24px);
   cursor: pointer;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: clamp(8px, 2vw, 16px);
+  outline: none;
 }
 
 .item:nth-of-type(1) {
   border: none;
 }
+.item:last-of-type {
+  border-bottom: 1px solid black;
+}
 
 .item p {
-  font-size: 5vw;
-  margin: 0px;
-}
-
-.item p:nth-of-type(1) {
-  margin-right: 0.75vw;
-}
-
-.item p:nth-of-type(2) {
-  margin-left: 0.75vw;
-}
-
-.item:last-of-type {
-  border-bottom: 2px solid black;
+  font-size: clamp(1.125rem, 6vw, 3rem);
+  margin: 0;
 }
 
 .item .imgContainer {
@@ -38,5 +31,23 @@
 }
 
 .item img {
-  width: 10vw;
+  width: clamp(28vw, 10vw, 10vw);
+}
+
+.item:focus-visible {
+  outline: 2px dashed currentColor;
+  outline-offset: 4px;
+}
+
+/* -------- Viewport breakpoints -------- */
+@media (min-width: 768px) {
+  .item {
+    border-top-width: 2px;
+  }
+  .item:last-of-type {
+    border-bottom-width: 2px;
+  }
+  .item img {
+    width: 10vw;
+  }
 }

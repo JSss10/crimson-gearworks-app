@@ -2,14 +2,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10rem 0 20rem 0;
+  padding: clamp(4rem, 8vw, 10rem) 0 clamp(8rem, 12vw, 20rem) 0;
 }
 
 .gallery {
-  width: 70%;
+  width: 100%;
+  max-width: 1200px;
 }
 
-.heading {
-  margin: 0 0 1rem 0;
-  font-weight: 600;
+/* -------- Viewport breakpoints -------- */
+@media (min-width: 768px) {
+  .gallery {
+    width: 85%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery {
+    width: 70%;
+  }
 }

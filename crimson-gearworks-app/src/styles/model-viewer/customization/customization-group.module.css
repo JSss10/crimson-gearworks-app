@@ -1,0 +1,29 @@
+:root {
+  /* Tailwind color refs used here */
+  --zinc-800: #27272a;
+  --neutral-50: #fafafa;
+  --zinc-600: #52525b;
+  --zinc-400: #a1a1aa;
+  --orange-500: #f97316;
+  --white: #ffffff;
+}
+
+.spaceY5 > * + * { margin-top: 1.25rem; }
+.spaceY2 > * + * { margin-top: 0.5rem; }
+
+.groupHeader { background: var(--zinc-800); border-radius: 0.25rem; padding: 0.75rem; }
+.groupTitle { color: var(--neutral-50); font-weight: 500; font-size: 0.875rem; }
+
+.optionRow { display: flex; align-items: center; gap: 1.25rem; }
+.iconWrapper {
+  width: 2rem; height: 2rem; background: var(--white); border-radius: 0.25rem;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.optionBtn {
+  flex: 1; padding: 0.5rem 0.75rem; border-radius: 0.25rem;
+  font-size: 0.875rem; font-weight: 500; transition: background-color .15s ease, color .15s ease;
+}
+.optionBtnActive { background: var(--orange-500); color: var(--white); }
+.optionBtnInactive { background: var(--zinc-600); color: var(--white); }
+.optionBtnInactive:hover { background: var(--zinc-400); }

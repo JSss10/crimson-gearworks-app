@@ -19,7 +19,7 @@ const exo2 = Exo_2({
 
 export const metadata: Metadata = {
   title: "Crimson Gearworks",
-  description: "",
+  description: "Test meta description",
 };
 
 export default function RootLayout({

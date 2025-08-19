@@ -1,13 +1,13 @@
-import React from 'react'
-import Link from 'next/link'
-import styles from '@/styles/footer/content.module.css'
+import React from "react";
+import Link from "next/link";
+import styles from "@/styles/footer/content.module.css";
 
 const SOCIALS = {
-  instagram: 'https://www.instagram.com/crimonsgearworks/',
-  twitter: 'https://twitter.com/',
-  tiktok: 'https://tiktok.com/',
-  discord: 'https://discord.gg/',
-}
+  instagram: "https://www.instagram.com/crimonsgearworks/",
+  twitter: "https://twitter.com/",
+  tiktok: "https://tiktok.com/",
+  discord: "https://discord.gg/",
+};
 
 export default function Content() {
   return (
@@ -15,7 +15,7 @@ export default function Content() {
       <Section1 />
       <Section2 />
     </div>
-  )
+  );
 }
 
 const Section1 = () => {
@@ -30,21 +30,21 @@ const Section1 = () => {
           <a className={styles.link} href="tel:+441274905411">+44 (0)1274 905411</a>
         </div>
         <p className={styles.smallText}>
-          Site by Crimson Studio | © 2025 Crimson Gearworks. All Rights Reserved.
+          Site by Crimson Gearworks | © 2025 Crimson Gearworks. All Rights Reserved.
         </p>
       </div>
       <Nav />
     </div>
-  )
-}
+  );
+};
 
 const Section2 = () => {
   return (
     <div className={styles.section2}>
       <h1 className={styles.heading}>CRIMSON<br />GEARWORKS</h1>
     </div>
-  )
-}
+  );
+};
 
 const Nav = () => {
   return (
@@ -76,5 +76,5 @@ const Nav = () => {
         <p><a href={SOCIALS.discord} target="_blank" rel="noopener noreferrer" className={styles.link}>Discord</a></p>
       </div>
     </div>
-  )
-}
+  );
+};

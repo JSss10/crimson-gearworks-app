@@ -16,14 +16,14 @@
 }
 
 .heading {
-  font-size: 10vw;
+  font-size: clamp(2.5rem, 10vw, 8rem);
   line-height: 1;
 }
 
 .nav {
-  display: flex;
-  flex-shrink: 0;
-  gap: 6rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2rem 4rem;
 }
 
 .column {
@@ -67,7 +67,7 @@
 }
 
 .button {
-  padding: 0.5rem 1.25rem;
+  padding: 0.75rem 1.25rem;
   border: 1px solid var(--text-color-secondary);
   background: transparent;
   border-radius: 50px;
@@ -85,4 +85,74 @@
   color: inherit;
   text-decoration: none;
   display: inline-block;
+  padding: 0.25rem 0;
+}
+
+.link:focus-visible,
+.button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* -------- Viewport breakpoints -------- */
+@media (max-width: 480px) {
+  .container {
+    padding: 2rem 1.25rem 1rem 1.25rem;
+  }
+  .nav {
+    grid-template-columns: 1fr;
+    gap: 1rem 0;
+  }
+  .headingSmall {
+    margin-top: 0.5rem;
+  }
+  .smallText {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 3rem 2rem 1.5rem 2rem;
+  }
+  .section1 {
+    margin-bottom: 3rem;
+    gap: 2rem;
+  }
+  .contactHeading {
+    font-size: 1.25rem;
+  }
+  .contactRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 4rem 3rem 2rem 3rem;
+  }
+  .nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem 3rem;
+  }
+  .section2 {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 1280px) {
+  .container {
+    padding: 5rem 4rem 2.5rem 4rem;
+  }
+  .section1 {
+    margin-bottom: 4.5rem;
+    gap: 3rem;
+  }
 }

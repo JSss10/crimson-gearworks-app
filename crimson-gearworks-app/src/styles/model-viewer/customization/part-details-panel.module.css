@@ -1,0 +1,83 @@
+:root {
+  --orange-500: #f97316;
+  --zinc-700: #3f3f46;
+  --gray-300: #d1d5db;
+  --white: #ffffff;
+  --zinc-800: #27272a;
+}
+
+.panel {
+  border-left: 5px solid var(--orange-500);
+  padding: 0.5rem; /* p-2 */
+  overflow-y: auto;
+  z-index: 3;
+}
+
+@media (min-width: 640px) {
+  .panel {
+    padding: 1rem;
+  } /* sm:p-4 */
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.panelTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.closeBtn {
+  transition: background-color 0.15s ease;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.closeBtn:hover {
+  background: var(--gray-300);
+}
+
+.closeIcon {
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  outline: none;
+  color: var(--gray-300);
+  background-color: var(--zinc-700);
+  transition: color 0.15s ease;
+}
+
+.closeBtn:hover .closeIcon {
+  color: var(--white);
+}
+
+.spaceY6 > * + * {
+  margin-top: 1.5rem;
+}
+
+.infoCard {
+  background: var(--zinc-800);
+  border-radius: 0.25rem;
+  padding: 1rem;
+}
+
+.orangeText {
+  color: var(--orange-500);
+  font-weight: 600;
+}
+
+.orangeSubtext {
+  color: var(--orange-500);
+  font-size: 0.875rem;
+}
+
+.logoOffset {
+  margin-bottom: 6rem;
+}
